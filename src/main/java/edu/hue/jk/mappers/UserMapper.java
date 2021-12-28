@@ -2,10 +2,7 @@ package edu.hue.jk.mappers;
 
 import edu.hue.jk.models.User;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
-
-import javax.xml.transform.Result;
 
 @Mapper
 public interface UserMapper {
