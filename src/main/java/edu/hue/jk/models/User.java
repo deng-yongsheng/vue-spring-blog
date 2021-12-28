@@ -11,5 +11,16 @@ public class User {
     String password;
     String usertype;
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", usertype='" + usertype + '\'' +
+                ", articles=" + articles +
+                '}';
+    }
+
     List<Article> articles;
 }
