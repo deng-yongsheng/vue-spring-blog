@@ -10,7 +10,7 @@ import javax.xml.transform.Result;
 @Mapper
 public interface UserMapper {
 
-    @Select("select * from user where username=#{username} and password=#{password}")
+    @Select("select * from user where username=#{user} and password=#{password}")
     User login(String user,String password);
 
 
