@@ -38,16 +38,17 @@ public class Migration {
         Connection tableconn = getConnection(url, driverName, username, password);
         Statement tablest = tableconn.createStatement();
         // 创建用户表
-        st.executeUpdate("CREATE TABLE  if not exists `user` (\n" +
+        st.executeUpdate("CREATE TABLE `user` (\n" +
                 "\t`id` INT(11) NOT NULL AUTO_INCREMENT,\n" +
-                "\t`username` TINYTEXT NOT NULL COLLATE 'utf8mb4_general_ci',\n" +
+                "\t`username` CHAR(20) NOT NULL DEFAULT '' COLLATE 'utf8mb4_general_ci',\n" +
                 "\t`password` TINYTEXT NOT NULL COLLATE 'utf8mb4_general_ci',\n" +
                 "\t`usertype` ENUM('admin','user') NOT NULL DEFAULT 'user' COLLATE 'utf8mb4_general_ci',\n" +
-                "\tPRIMARY KEY (`id`) USING BTREE\n" +
+                "\tPRIMARY KEY (`id`) USING BTREE,\n" +
+                "\tUNIQUE INDEX `username` (`username`) USING BTREE\n" +
                 ")\n" +
                 "COLLATE='utf8mb4_general_ci'\n" +
                 "ENGINE=InnoDB\n" +
-                ";\n");
+                ";");
         // 创建文章表
         st.executeUpdate("CREATE TABLE if not exists `ariticle` (\n" +
                 "\t`id` INT(11) NOT NULL AUTO_INCREMENT,\n" +
@@ -62,6 +63,10 @@ public class Migration {
                 "COLLATE='utf8mb4_general_ci'\n" +
                 "ENGINE=InnoDB\n" +
                 ";\n");
+        // 插入一个默认用户
+        st.executeUpdate("INSERT IGNORE INTO `user` (`id`, `username`, `password`, `usertype`) VALUES\n" +
+                "\t(1, 'sheng', '123456', 'admin');");
+
         System.out.println("输出所有表");
         ResultSet show_tables = st.executeQuery("show tables");//获取某一个数据库下表的信息
         while (show_tables.next()) {
