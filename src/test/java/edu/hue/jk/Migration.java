@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
@@ -23,7 +20,7 @@ public class Migration {
     @Value("${spring.datasource.driver-class-name}")
     private String driverName;
 
-    public static Connection getConnection(url, driverName, username, password) throws ClassNotFoundException, SQLException {
+    public static Connection getConnection(String url, String driverName, String username, String password) throws ClassNotFoundException, SQLException {
         Connection conn = null;
         Class.forName(driverName);
         conn = DriverManager.getConnection(url, username, password);
@@ -38,9 +35,51 @@ public class Migration {
     public void migration() throws SQLException, ClassNotFoundException {
         Connection conn = getConnection(url, driverName, username, password);
         Statement st = conn.createStatement();
-        st.executeUpdate("create database blog if not exists");
-        st.executeUpdate("use blog");
+        Connection tableconn = getConnection(url, driverName, username, password);
+        Statement tablest = tableconn.createStatement();
+        // 创建用户表
+        st.executeUpdate("CREATE TABLE  if not exists `user` (\n" +
+                "\t`id` INT(11) NOT NULL AUTO_INCREMENT,\n" +
+                "\t`username` TINYTEXT NOT NULL COLLATE 'utf8mb4_general_ci',\n" +
+                "\t`password` TINYTEXT NOT NULL COLLATE 'utf8mb4_general_ci',\n" +
+                "\t`usertype` ENUM('admin','user') NOT NULL DEFAULT 'user' COLLATE 'utf8mb4_general_ci',\n" +
+                "\tPRIMARY KEY (`id`) USING BTREE\n" +
+                ")\n" +
+                "COLLATE='utf8mb4_general_ci'\n" +
+                "ENGINE=InnoDB\n" +
+                ";\n");
+        // 创建文章表
+        st.executeUpdate("CREATE TABLE if not exists `ariticle` (\n" +
+                "\t`id` INT(11) NOT NULL AUTO_INCREMENT,\n" +
+                "\t`uuid` TINYTEXT NOT NULL COLLATE 'utf8mb4_general_ci',\n" +
+                "\t`title` TINYTEXT NOT NULL COLLATE 'utf8mb4_general_ci',\n" +
+                "\t`datetime` DATETIME NULL DEFAULT NULL,\n" +
+                "\t`userid` INT(11) NOT NULL,\n" +
+                "\tPRIMARY KEY (`id`) USING BTREE,\n" +
+                "\tINDEX `FK__user` (`userid`) USING BTREE,\n" +
+                "\tCONSTRAINT `FK__user` FOREIGN KEY (`userid`) REFERENCES `blog`.`user` (`id`) ON UPDATE NO ACTION ON DELETE NO ACTION\n" +
+                ")\n" +
+                "COLLATE='utf8mb4_general_ci'\n" +
+                "ENGINE=InnoDB\n" +
+                ";\n");
+        System.out.println("输出所有表");
+        ResultSet show_tables = st.executeQuery("show tables");//获取某一个数据库下表的信息
+        while (show_tables.next()) {
+            String tablename = show_tables.getString("Tables_in_blog");
+            System.out.println(tablename);
 
+            ResultSet line_rs = tablest.executeQuery("desc " + tablename);
+            System.out.println("Field\tType\tNull\tKey\tDefault\tExtra");
+            while(line_rs.next()){
+                System.out.print(line_rs.getString("Field")+"\t");
+                System.out.print(line_rs.getString("Type")+"\t");
+                System.out.print(line_rs.getString("Null")+"\t");
+                System.out.print(line_rs.getString("Key")+"\t");
+                System.out.print(line_rs.getString("Default")+"\t");
+                System.out.print(line_rs.getString("Extra")+"\n");
+            }
+            System.out.println("==============================");
+        }
 
     }
 }
