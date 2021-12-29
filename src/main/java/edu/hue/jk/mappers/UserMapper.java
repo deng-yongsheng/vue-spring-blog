@@ -7,19 +7,24 @@ import org.apache.ibatis.annotations.Select;
 
 @Mapper
 public interface UserMapper {
-
-    @Select("select * from user where username=#{user} and password=#{password}")
-    User login(String user,String password);
-
+    /*
+    用户登录模块
+     */
+    @Select("select * from user where username=#{username} and password=#{password}")
+    User login(String username,String password);
+    /*
+    用户注册模块
+     */
     @Insert("insert into user(username,password) values(#{username},#{password})")
-    int rigister(User user);
+    int register(String username, String password);
 
     /*
      todo
      用户权限提升，修改用户信息，删除用户
      */
-
-
+    //根据用户名查找用户信息
+    @Select("select * from user where username = #{username}")
+    User getUserByName(String username);
 
 
 }
