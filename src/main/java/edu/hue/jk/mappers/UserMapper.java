@@ -3,6 +3,7 @@ package edu.hue.jk.mappers;
 import edu.hue.jk.models.User;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 @Mapper
@@ -11,7 +12,7 @@ public interface UserMapper {
     用户登录模块
      */
     @Select("select * from user where username=#{username} and password=#{password}")
-    User login(String username,String password);
+    User login(@Param("username") String username, @Param("password") String password);
     /*
     用户注册模块
      */
