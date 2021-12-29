@@ -65,7 +65,7 @@ public class Migration {
                 ";\n");
         // 创建评论表
         st.executeUpdate("CREATE TABLE `comment` (\n" +
-                "\t`id` INT(11) NOT NULL,\n" +
+                "\t`id` INT(11) NOT NULL AUTO_INCREMENT,\n" +
                 "\t`userid` INT(11) NULL DEFAULT NULL,\n" +
                 "\t`articleid` CHAR(50) NOT NULL COLLATE 'utf8mb4_general_ci',\n" +
                 "\t`time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,\n" +
@@ -75,6 +75,7 @@ public class Migration {
                 ")\n" +
                 "COLLATE='utf8mb4_general_ci'\n" +
                 "ENGINE=InnoDB\n" +
+                "AUTO_INCREMENT=2\n" +
                 ";\n");
         // 插入一个默认用户
         st.executeUpdate("INSERT IGNORE INTO `user` (`id`, `username`, `password`, `usertype`) VALUES\n" +
