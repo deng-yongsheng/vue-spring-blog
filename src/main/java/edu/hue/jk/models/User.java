@@ -14,12 +14,11 @@ public class User {
     @Override
     public String toString() {
         return "{" +
-                "'id'=" + id +
-                ", 'username':'" + username + '\'' +
-                ", 'password':'" + password + '\'' +
-                ", 'usertype':'" + usertype + '\'' +
-                ", 'articles':" + articles +
-                '}';
+                "\"id\":\"" + id +
+                "\", \"username\":\"" + username +
+                "\", \"password\":\"" + password +
+                "\", \"usertype\":\"" + usertype +
+                "\", \"articles\":\"" + articles + "\"}";
     }
 
     List<Article> articles;
