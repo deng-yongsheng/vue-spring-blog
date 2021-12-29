@@ -66,6 +66,8 @@ public class Migration {
         // 插入一个默认用户
         st.executeUpdate("INSERT IGNORE INTO `user` (`id`, `username`, `password`, `usertype`) VALUES\n" +
                 "\t(1, 'sheng', '123456', 'admin');");
+        st.executeUpdate("INSERT IGNORE INTO `user` (`id`, `username`, `password`, `usertype`) VALUES\n" +
+                "\t(1, 'xutao', '123456', 'user');");
 
         System.out.println("输出所有表");
         ResultSet show_tables = st.executeQuery("show tables");//获取某一个数据库下表的信息
