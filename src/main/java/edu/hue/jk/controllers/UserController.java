@@ -8,18 +8,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 @Controller()
 @RequestMapping("/api")
-public class LoginController {
+public class UserController {
     @Autowired
     private UserMapper userMapper;
 
     @GetMapping("/login")
     @ResponseBody
     //登录模块
-    public String login(Model model, String username, String password) {
+    public String login(String username, String password) {
         User loginUser = userMapper.login(username, password);
         if (loginUser != null) {
             return loginUser.toString();
@@ -31,11 +30,15 @@ public class LoginController {
     //注册模块
     @GetMapping("/register")
     @ResponseBody
-    public String register(Model model, String username, String password) {
-        int isRegister = userMapper.register(username, password);
-        if (userMapper.getUserByName(username) == null)
-            return "注册成功!";
-        else
-            return "注册失败，可能用户名重复！";
+    public String register(String username, String password) {
+        if (userMapper.getUserByName(username) == null) {
+            int isRegister = userMapper.register(username, password);
+            if (isRegister > 0) {
+                return "注册成功!";
+            } else {
+                return "注册失败!";
+            }
+        } else
+            return "注册失败，用户名重复！";
     }
 }
