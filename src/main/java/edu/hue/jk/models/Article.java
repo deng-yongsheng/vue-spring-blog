@@ -6,10 +6,9 @@ import java.sql.Date;
 
 @Data
 public class Article {
-    Integer id;
-    String uuid;
+    String id;
     String title;
-    Date datetime;
+    Date time;
 
     User Author;
 }
