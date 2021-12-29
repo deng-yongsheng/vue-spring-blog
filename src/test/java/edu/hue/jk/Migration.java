@@ -48,17 +48,30 @@ public class Migration {
                 ")\n" +
                 "COLLATE='utf8mb4_general_ci'\n" +
                 "ENGINE=InnoDB\n" +
-                ";");
+                "AUTO_INCREMENT=3\n" +
+                ";\n");
         // 创建文章表
-        st.executeUpdate("CREATE TABLE if not exists `article` (\n" +
-                "\t`id` INT(11) NOT NULL AUTO_INCREMENT,\n" +
-                "\t`uuid` TINYTEXT NOT NULL COLLATE 'utf8mb4_general_ci',\n" +
+        st.executeUpdate("CREATE TABLE `article` (\n" +
+                "\t`id` CHAR(50) NOT NULL COMMENT '文章的uuid' COLLATE 'utf8mb4_general_ci',\n" +
                 "\t`title` TINYTEXT NOT NULL COLLATE 'utf8mb4_general_ci',\n" +
-                "\t`datetime` DATETIME NULL DEFAULT NULL,\n" +
+                "\t`time` DATETIME NULL DEFAULT NULL,\n" +
                 "\t`userid` INT(11) NOT NULL,\n" +
                 "\tPRIMARY KEY (`id`) USING BTREE,\n" +
                 "\tINDEX `FK__user` (`userid`) USING BTREE,\n" +
                 "\tCONSTRAINT `FK__user` FOREIGN KEY (`userid`) REFERENCES `blog`.`user` (`id`) ON UPDATE NO ACTION ON DELETE NO ACTION\n" +
+                ")\n" +
+                "COLLATE='utf8mb4_general_ci'\n" +
+                "ENGINE=InnoDB\n" +
+                ";\n");
+        // 创建评论表
+        st.executeUpdate("CREATE TABLE `comment` (\n" +
+                "\t`id` INT(11) NOT NULL,\n" +
+                "\t`userid` INT(11) NULL DEFAULT NULL,\n" +
+                "\t`articleid` CHAR(50) NOT NULL COLLATE 'utf8mb4_general_ci',\n" +
+                "\t`time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,\n" +
+                "\t`content` TEXT NOT NULL COLLATE 'utf8mb4_general_ci',\n" +
+                "\tPRIMARY KEY (`id`) USING BTREE,\n" +
+                "\tINDEX `articleid` (`articleid`) USING BTREE\n" +
                 ")\n" +
                 "COLLATE='utf8mb4_general_ci'\n" +
                 "ENGINE=InnoDB\n" +
