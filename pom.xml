@@ -62,6 +62,13 @@
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
 
+        <!-- spring整合MongoDB -->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-mongodb</artifactId>
+            <version>3.3.0</version>
+        </dependency>
+
         <!-- 使用security进行登录验证 -->
         <!--        <dependency>-->
         <!--            <groupId>org.springframework.boot</groupId>-->
