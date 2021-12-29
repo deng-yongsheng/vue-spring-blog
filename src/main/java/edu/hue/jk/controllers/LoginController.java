@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 @Controller
 public class LoginController {
@@ -15,6 +16,7 @@ public class LoginController {
 
     @GetMapping("/login")
     @ResponseBody
+    //登录模块
     public String login(Model model, String username, String password) {
         User loginUser = userMapper.login(username, password);
         if (loginUser != null) {
@@ -22,5 +24,16 @@ public class LoginController {
         } else {
             return "用户名或者密码错误！";
         }
+    }
+
+    //注册模块
+    @GetMapping("/login")
+    @ResponseBody
+    public String register(Model model, String username, String password) {
+        int isRegister = userMapper.register(username, password);
+        if (userMapper.getUserByName(username) == null)
+            return "注册成功!";
+        else
+            return "注册失败，可能用户名重复！";
     }
 }
