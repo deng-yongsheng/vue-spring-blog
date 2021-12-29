@@ -27,7 +27,7 @@ public class LoginController {
     }
 
     //注册模块
-    @GetMapping("/login")
+    @GetMapping("/register")
     @ResponseBody
     public String register(Model model, String username, String password) {
         int isRegister = userMapper.register(username, password);
