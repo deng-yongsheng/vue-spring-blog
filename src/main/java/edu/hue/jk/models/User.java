@@ -13,12 +13,12 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", usertype='" + usertype + '\'' +
-                ", articles=" + articles +
+        return "{" +
+                "'id'=" + id +
+                ", 'username':'" + username + '\'' +
+                ", 'password':'" + password + '\'' +
+                ", 'usertype':'" + usertype + '\'' +
+                ", 'articles':" + articles +
                 '}';
     }
 
