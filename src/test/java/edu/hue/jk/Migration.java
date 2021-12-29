@@ -50,7 +50,7 @@ public class Migration {
                 "ENGINE=InnoDB\n" +
                 ";");
         // 创建文章表
-        st.executeUpdate("CREATE TABLE if not exists `ariticle` (\n" +
+        st.executeUpdate("CREATE TABLE if not exists `article` (\n" +
                 "\t`id` INT(11) NOT NULL AUTO_INCREMENT,\n" +
                 "\t`uuid` TINYTEXT NOT NULL COLLATE 'utf8mb4_general_ci',\n" +
                 "\t`title` TINYTEXT NOT NULL COLLATE 'utf8mb4_general_ci',\n" +
