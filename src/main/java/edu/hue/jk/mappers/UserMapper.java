@@ -14,4 +14,12 @@ public interface UserMapper {
     @Insert("insert into user(username,password) values(#{username},#{password})")
     int rigister(User user);
 
+    /*
+     todo
+     用户权限提升，修改用户信息，删除用户
+     */
+
+
+
+
 }
