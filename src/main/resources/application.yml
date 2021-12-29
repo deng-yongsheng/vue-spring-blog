@@ -15,3 +15,6 @@ spring:
     mode: HTML5
     suffix: .html
     prefix: classpath:/templates/
+
+app:
+  static-folder: classpath:/templates/
