@@ -9,6 +9,7 @@ public class Article {
     String id;
     String title;
     Date time;
+    Integer userid;
 
-    User Author;
+    User author;
 }
