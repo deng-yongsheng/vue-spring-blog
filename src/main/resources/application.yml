@@ -6,6 +6,8 @@ server:
 spring:
   mvc:
     static-path-pattern: /**
+    view:
+      suffix: .html
   resources:
     static-locations: classpath:/resources/
   datasource:
