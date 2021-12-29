@@ -5,6 +5,7 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
 		<link rel="stylesheet" type="text/css" href="css/element.css" />
+		<link rel="stylesheet" type="text/css" href="css/global.css" />
 		<script src="js/jquery-3.6.0.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
@@ -16,7 +17,8 @@
 				display: block;
 				max-width: 600px;
 			}
-			#rigisterapp label{
+
+			#rigisterapp label {
 				font-size: 16px;
 			}
 		</style>
@@ -35,8 +37,11 @@
 					<el-form-item label="重复密码">
 						<el-input v-model="retype_password"></el-input>
 					</el-form-item>
-					<el-row  type="flex" justify="center">
+					<el-row type="flex" justify="center">
 						<el-button type="primary" @click="submitForm('ruleForm')">立即注册</el-button>
+						<el-button type="default">
+							<el-link href="login.html">转到登录</el-link>
+						</el-button>
 					</el-row>
 				</el-form>
 			</div>
