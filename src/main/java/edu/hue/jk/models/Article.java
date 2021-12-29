@@ -8,7 +8,7 @@ import java.sql.Date;
 public class Article {
     String id;
     String title;
-    Date datetime;
+    Date time;
 
     User Author;
 }

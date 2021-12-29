@@ -19,7 +19,6 @@ public interface UserMapper {
     int register(String username, String password);
 
     /*
-     todo
      用户权限提升，修改用户信息，删除用户
      */
     //根据用户名查找用户信息
