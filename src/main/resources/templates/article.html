@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/element.css" />
+		<link rel="stylesheet" type="text/css" href="css/global.css"/>
+		<script src="js/jquery-3.6.0.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/element.js" type="text/javascript" charset="utf-8"></script>
+		<title>最新文章列表</title>
+		<style type="text/css">
+
+
+			#articleapp .title {
+				font-size: 24px;
+				color: black;
+				margin-bottom: 5px;
+			}
+
+			#articleapp .article {
+				margin-bottom: 10px;
+			}
+
+			#articleapp .author {
+				/* font-weight: bold; */
+				font-size: 18px;
+			}
+
+			#articleapp .time {
+				font-size: 18px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<h1 class="page-header text-center">文章标题</h1>
+			<div style="height: 30px;"> </div>
+			<div class="container" id="articleapp">
+				<el-row :gutter="20" type="flex" class="article" v-for="article in articleList">
+					<el-col :span="16">
+						<div>
+							<el-link class="title" :underline="false"> {{ article.title }} </el-link>
+						</div>
+						<div> {{ article.detail }} </div>
+					</el-col>
+					<el-col :span="4" class="author">
+						{{ article.author }}
+					</el-col>
+					<el-col :span="4" class="time">
+						{{ article.time }}
+					</el-col>
+				</el-row>
+			</div>
+		</div>
+
+		<script type="text/javascript">
+			var app = new Vue({
+				el: '#articleapp',
+				data: {
+					articleList: [{
+							title: "编码12年，如何实现财务自由！",
+							detail: "从硬件到软件工程师，我是如何实现财务独立的",
+							author: "邓永盛",
+							time: "2021-12-29",
+
+						},
+						{
+							title: "最易/难学习的编程语言榜单出炉",
+							detail: "C++最难学？",
+							author: "xutao",
+							time: "2021-12-29"
+						},
+						{
+							title: "谷歌苹果重塑“传统汽车”",
+							detail: "谁会最先推出自家的汽车？",
+							author: "sheng",
+							time: "2021-12-29"
+						},
+						{
+							title: "只有数学好才能当程序员？”",
+							detail: "智力从不是决定因素，重要的是要有勇气",
+							author: "sheng",
+							time: "2021-12-29"
+						},
+					],
+				}
+			})
+		</script>
+
+	</body>
+</html>
