@@ -38,7 +38,7 @@ public class Migration {
         Connection tableconn = getConnection(url, driverName, username, password);
         Statement tablest = tableconn.createStatement();
         // 创建用户表
-        st.executeUpdate("CREATE TABLE `user` (\n" +
+        st.executeUpdate("CREATE TABLE if not exists `user` (\n" +
                 "\t`id` INT(11) NOT NULL AUTO_INCREMENT,\n" +
                 "\t`username` CHAR(20) NOT NULL DEFAULT '' COLLATE 'utf8mb4_general_ci',\n" +
                 "\t`password` TINYTEXT NOT NULL COLLATE 'utf8mb4_general_ci',\n" +
@@ -51,7 +51,7 @@ public class Migration {
                 "AUTO_INCREMENT=3\n" +
                 ";\n");
         // 创建文章表
-        st.executeUpdate("CREATE TABLE `article` (\n" +
+        st.executeUpdate("CREATE TABLE if not exists `article` (\n" +
                 "\t`id` CHAR(50) NOT NULL COMMENT '文章的uuid' COLLATE 'utf8mb4_general_ci',\n" +
                 "\t`title` TINYTEXT NOT NULL COLLATE 'utf8mb4_general_ci',\n" +
                 "\t`time` DATETIME NULL DEFAULT NULL,\n" +
@@ -64,7 +64,7 @@ public class Migration {
                 "ENGINE=InnoDB\n" +
                 ";\n");
         // 创建评论表
-        st.executeUpdate("CREATE TABLE `comment` (\n" +
+        st.executeUpdate("CREATE TABLE if not exists `comment` (\n" +
                 "\t`id` INT(11) NOT NULL AUTO_INCREMENT,\n" +
                 "\t`userid` INT(11) NULL DEFAULT NULL,\n" +
                 "\t`articleid` CHAR(50) NOT NULL COLLATE 'utf8mb4_general_ci',\n" +
