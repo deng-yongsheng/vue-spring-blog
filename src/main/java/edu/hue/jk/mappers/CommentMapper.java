@@ -36,11 +36,5 @@ public interface CommentMapper {
     @Delete("delete from comment where articleid = #{articleid} and id = #{id}")
     int del(String articleid, Integer id);
 
-    /*
-    修改评论模块
-     */
-    //根据文章编号和评论编号修改用户评论
-    @Update("update comment set userid = #{userid}, content = #{content} where articleid = #{articleid} and id = #{id}")
-    int update(String articleid, Integer id);
 
 }
