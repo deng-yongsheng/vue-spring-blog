@@ -21,6 +21,9 @@ public class UserController {
     @ResponseBody
     //登录模块
     public String login(String username, String password) {
+        if (username == null || password == null || username.length() == 0 || password.length() == 0) {
+            return "用户和密码不能为空！";
+        }
         User loginUser = userMapper.login(username, password);
         if (loginUser != null) {
             return loginUser.toString();
