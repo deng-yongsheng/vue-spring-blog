@@ -1,10 +1,7 @@
 package edu.hue.jk.mappers;
 
 import edu.hue.jk.models.User;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 @Mapper
 public interface UserMapper {
@@ -19,12 +16,23 @@ public interface UserMapper {
     @Insert("insert into user(username,password) values(#{username},#{password})")
     int register(String username, String password);
 
-    /*
-     用户权限提升，修改用户信息，删除用户
-     */
     //根据用户名查找用户信息
     @Select("select * from user where username = #{username}")
     User getUserByName(String username);
 
+    //删除用户
+    @Delete("delete from user where username = #{username} and password = #{password}")
+    int del(String username, String password);
 
+    /*
+    修改用户信息
+     */
+    //仅修改用户名
+
+    //仅修改用户密码
+    //同时修改用户名和用户密码
+
+    //修改用户权限
+    @Update("update user set usertype=#{usertype} where username=#{username}")
+    int updateconfigure(String username, String usertype);
 }
