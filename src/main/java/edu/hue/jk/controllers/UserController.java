@@ -2,6 +2,7 @@ package edu.hue.jk.controllers;
 
 import edu.hue.jk.mappers.UserMapper;
 import edu.hue.jk.models.User;
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,6 +41,27 @@ public class UserController {
                 return "注册失败!";
             }
         } else
-            return "注册失败，用户名重复！";
+            return "注册失败，当前用户名已被注册！";
     }
+
+    //根据用户名查找用户信息
+    @GetMapping("/selectUserInfoByUserid")
+    @ResponseBody
+    public String selectUserInfoByUserid(String username) {
+        User userinfo = userMapper.getUserByName(username);
+        return userinfo.toString();
+    }
+
+    //删除用户
+    @GetMapping("/delUserInfo")
+    @ResponseBody
+    public String delUserInfo(String username, String password){
+        int delUserInfoByNameandPwd = userMapper.del(username, password);
+        if (delUserInfoByNameandPwd > 0){
+            return "该用户已成功删除！";
+        }else{
+            return "删除用户失败！"
+        }
+    }
+
 }
