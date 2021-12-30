@@ -18,6 +18,7 @@ import java.util.List;
 public class ArticleController {
     @Autowired
     private AriticleMapper ariticleMapper;
+
     /*
     查询模块
      */
@@ -25,34 +26,39 @@ public class ArticleController {
     @GetMapping("/selectAllArticles")
     @ResponseBody
     public String selectAllArticles(Model model) {
-        List<Article> articlesList = ariticleMapper.getAllArticle();;
+        List<Article> articlesList = ariticleMapper.getAllArticle();
+        ;
         return articlesList.toString();
     }
+
     //根据用户id号获取某个用户的所有文章
     @GetMapping("/selectArticlesByUserid")
     @ResponseBody
-    public String selectArticlesByUserid(Model model, Integer userid){
+    public String selectArticlesByUserid(Model model, Integer userid) {
         List<Article> articleList = ariticleMapper.getArticlesByid(userid);
         return articleList.toString();
     }
+
     //根据标题查询系统内的所有同名文章
     @GetMapping("/selectArticlesByTitle")
     @ResponseBody
-    public String selectArticlesByTitle(Model model, String title){
+    public String selectArticlesByTitle(Model model, String title) {
         List<Article> articleList = ariticleMapper.getArticlesByt(title);
         return articleList.toString();
     }
+
     //根据标题和用户id查询文章
     @GetMapping("/selectArticlesByTitleandUserid")
     @ResponseBody
-    public String selectArticlesByTitleandUserid(Model model, String title, Integer userid){
+    public String selectArticlesByTitleandUserid(Model model, String title, Integer userid) {
         List<Article> articleList = ariticleMapper.getArticleByidandt(title, userid);
         return articleList.toString();
     }
+
     //根据文章id查询对应文章
     @GetMapping("/selectArticlesById")
     @ResponseBody
-    public String selectArticlesById(String id){
+    public String selectArticlesById(String id) {
         Article uniquearticle = ariticleMapper.getUniqueArticle(id);
         return uniquearticle.toString();
     }
@@ -63,22 +69,23 @@ public class ArticleController {
     //根据用户id号删除指定用户的所有文章
     @GetMapping("/delArticlesByUserid")
     @ResponseBody
-    public String delArticlesByUserid(Integer userid){
+    public String delArticlesByUserid(Integer userid) {
         int isdelByUserid = ariticleMapper.delByUserid(userid);
-        if (isdelByUserid > 0){
+        if (isdelByUserid > 0) {
             return "删除文章成功!";
-        }else{
+        } else {
             return "删除文章失败！";
         }
     }
+
     //根据文章id号删除文章
     @GetMapping("/delArticlesById")
     @ResponseBody
-    public String delArticlesById(String id){
+    public String delArticlesById(String id) {
         int isdelById = ariticleMapper.delByid(id);
-        if (isdelById > 0){
+        if (isdelById > 0) {
             return "删除文章成功!";
-        }else{
+        } else {
             return "删除文章失败！";
         }
     }
