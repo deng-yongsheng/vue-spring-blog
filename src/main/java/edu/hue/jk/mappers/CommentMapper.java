@@ -7,28 +7,34 @@ import java.util.List;
 
 @Mapper
 public interface CommentMapper {
+    /*
+    查询模块
+     */
     //根据文章编号查询评论相关信息
     @Select("select * from comment where articleid=#{articleid}")
     List<Comment> getCommnentListByArticleId(String articleid);
 
     //根据文章编号和用户编号查询某文章下对应用户的所有评论信息
     @Select("select * from comment where articleid=#{articleid} and userid = #{userid}")
-    List<Comment> getCommentByAIdandUId(String articleid, Integer userid);
+    List<Comment> getCommentListByAIdandUId(String articleid, Integer userid);
 
-    //根据评论编号、文章编号以及用户编号查询某文章下对应用户的唯一一条评论
+    //根据评论编号、文章编号以及用户编号查询某文章下对应用户的唯一评论
     @Select("select * from comment where articleid=#{articleid} and userid=#{userid} and id=#{id}")
     Comment getUniqueComment(String articleid, Integer userid, Integer id);
 
-    //用户插入一条评论
+    /*
+    添加评论模块
+     */
+    //插入一条用户评论记录
     @Insert("insert into comment(userid, articleid, content) values (#{userid}, #{articleid}, #{content})")
     int add(Integer userid, String articleid, String content);
 
-    //用户删除一条评论
-    @Delete("delete from comment where id = #{id}")
-    int del(Integer id);
+    /*
+    删除评论模块
+     */
+    //根据评论编号和文章编号删除一条评论
+    @Delete("delete from comment where articleid = #{articleid} and id = #{id}")
+    int del(String articleid, Integer id);
 
-    //用户修改评论
-    @Update("update comment set userid = #{userid}, content = #{content} where id = #{id}")
-    int update(Integer userid, String content);
 
 }

@@ -18,45 +18,64 @@ public class CommentController {
     @Autowired
     private CommentMapper commentMapper;
 
+    //查询模块
     /*
-    功能：根据文章编号查询相关的评论信息
+    功能：根据文章编号查询相关的评论信息（测试成功）
      */
-    @GetMapping("/searchAllCom")
+    @GetMapping("/searchAllComByArticleId")
     @ResponseBody
-    public String searchAllcom(Model model, String articleid) {
+    public String searchAllComByArticleId(Model model, String articleid) {
         List<Comment> commentList = commentMapper.getCommnentListByArticleId(articleid);
         return commentList.toString();
     }
 
     /*
-    功能：用户插入一条评论
+    功能：根据文章编号和用户编号查询某文章下对应用户的所有评论信息（测试成功）
+     */
+    @GetMapping("/searchAllCommmentByAIdandUId")
+    @ResponseBody
+    public String searchAllCommmentByAIdandUId(Model model, String articleid, Integer userid){
+        List<Comment> commentList = commentMapper.getCommentListByAIdandUId(articleid, userid);
+        return commentList.toString();
+    }
+
+    /*
+    功能：根据评论编号、文章编号以及用户编号查询某文章下对应用户的评论（测试成功）
+     */
+    @GetMapping("/searchUniqueComment")
+    @ResponseBody
+    public String searchUniqueComment(Model model,String articleid, Integer userid, Integer id){
+        Comment commentList = commentMapper.getUniqueComment(articleid, userid, id);
+        return commentList.toString();
+    }
+
+    //添加评论模块
+    /*
+    功能：插入一条用户评论记录（测试成功）
      */
     @GetMapping("/addcomment")
     @ResponseBody
-    public String addcomment(Integer userid, String articleid, String content){
-        if(userid == null){
-            int isadd = commentMapper.add(userid, articleid, content);
-            if(isadd > 0){
-                return "当前用户属于匿名评论";
-            }else{
-                return "评论失败!";
-            }
+    public String addcomment(Integer userid, String articleid, String content) {
+        int isadd = commentMapper.add(userid, articleid, content);
+        if (isadd > 0) {
+            return "评论成功!";
+        } else {
+            return "评论失败!";
         }
-        else{
-            int isadd = commentMapper.add(userid, articleid, content);
-            if(isadd > 0){
-                return "当前用户名为"+userid;
-                /*
-                todo
-                未知返回
-                 */
-            }else{
-                return "评论失败!";
-            }
-
-        }
-
     }
-
+    //删除评论模块
+    /*
+    功能：根据评论编号和文章编号删除一条评论（测试成功）
+     */
+    @GetMapping("/delCommentByIdandAId")
+    @ResponseBody
+    public String delCommentByIdandAId(String articleid, Integer id) {
+        int isdel = commentMapper.del(articleid, id);
+        if (isdel > 0) {
+            return "删除评论成功!";
+        } else {
+            return "删除评论失败!";
+        }
+    }
 
 }
