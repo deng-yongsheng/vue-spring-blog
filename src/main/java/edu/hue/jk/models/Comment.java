@@ -15,11 +15,10 @@ public class Comment {
     @Override
     public String toString() {
         return "Comment{" +
-                "id'=" + id +
-                ", 'userid'=" + userid +
-                ", 'articleid'=" + articleid +
-                ", 'time'=" + time +
-                ", 'content'='" + content + '\'' +
-                '}';
+                "\"id\"=\"" + id +
+                "\", \"userid\"=\"" + userid +
+                "\", \"articleid\"=\"" + articleid +
+                "\", \"time\"=\"" + time +
+                "\", \"content\"=\"" + content + "\"}";
     }
 }
