@@ -14,4 +14,20 @@ public class DocArticle {
     Date time;
     Integer userid;
     String content;
+
+    @Override
+    public String toString() {
+        return "{\"DocArticle\":{"
+                + "\"id\":\""
+                + id + '\"'
+                + ",\"title\":\""
+                + title + '\"'
+                + ",\"time\":\""
+                + time + '\"'
+                + ",\"userid\":"
+                + userid
+                + ",\"content\":\""
+                + content + '\"'
+                + "}}";
+    }
 }
