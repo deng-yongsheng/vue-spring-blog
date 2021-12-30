@@ -22,3 +22,32 @@ spring:
     suffix: .html
     prefix: classpath:/templates/
 
+mongodb:
+  # 连接配置
+  dbconfig:
+    # 库名
+    database: blog
+    host: localhost
+    port: 27017
+    username: root
+    password: 123456
+  ## 数据库参数配置
+  option:
+    always-use-m-beans: false
+    connect-timeout: 10000
+    heartbeat-connect-timeout: 20000
+    heartbeat-socket-timeout: 20000
+    local-threshold: 15
+    max-connection-idle-time: 0
+    max-connection-life-time: 0
+    max-connections-per-host: 100
+    min-connections-per-host: 10
+    max-wait-time: 120000
+    heartbeat-frequency: 10000
+    min-heartbeat-frequency: 500
+    server-selection-timeout: 30000
+    socket-keep-alive: false
+    socket-timeout: 0
+    ssl-enabled: false
+    ssl-invalid-host-name-allowed: false
+    threads-allowed-to-block-for-connection-multiplier: 5

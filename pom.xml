@@ -62,11 +62,10 @@
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
 
-        <!-- spring整合MongoDB -->
+        <!-- mongodb 依赖-->
         <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-mongodb</artifactId>
-            <version>3.3.0</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
         </dependency>
 
         <!-- 使用security进行登录验证 -->
@@ -76,16 +75,16 @@
         <!--        </dependency>-->
     </dependencies>
 
-    <!--    <repositories>-->
-    <!--        &lt;!&ndash; 通过阿里云maven资料库下载软件包 &ndash;&gt;-->
-    <!--        <repository>-->
-    <!--            <id>aliyun-repos</id>-->
-    <!--            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>-->
-    <!--            <snapshots>-->
-    <!--                <enabled>false</enabled>-->
-    <!--            </snapshots>-->
-    <!--        </repository>-->
-    <!--    </repositories>-->
+    <repositories>
+        <!-- 通过阿里云maven资料库下载软件包 -->
+        <repository>
+            <id>aliyun-repos</id>
+            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 
 
 </project>
