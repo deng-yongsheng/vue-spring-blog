@@ -78,20 +78,4 @@ public class CommentController {
         }
     }
 
-    //修改评论模块
-    /*
-    功能：根据文章编号和评论编号修改用户评论
-     */
-    @GetMapping("/updateCommentByAIdandId")
-    @ResponseBody
-    public String updateCommentByAIdandId(String articleid, Integer id) {
-        int isupdate = commentMapper.update(articleid, id);
-        if (isupdate > 0) {
-            return "修改评论成功!";
-        } else {
-            return "修改评论失败!";
-        }
-    }
-
-
 }
