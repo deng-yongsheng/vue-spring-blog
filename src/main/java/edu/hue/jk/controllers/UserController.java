@@ -63,7 +63,7 @@ public class UserController {
         if (delUserInfoByNameandPwd > 0){
             return "该用户已成功删除！";
         }else{
-            return "删除用户失败！"
+            return "删除用户失败！";
         }
     }
 
