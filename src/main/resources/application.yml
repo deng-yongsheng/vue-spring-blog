@@ -27,10 +27,10 @@ mongodb:
   dbconfig:
     # 库名
     database: blog
-    host: localhost
+    host: dengyongsheng.cn
     port: 27017
-    username: root
-    password: 123456
+    username: admin
+    password: nwxb0nbx
   ## 数据库参数配置
   option:
     always-use-m-beans: false
