@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/element.css" />
+		<link rel="stylesheet" type="text/css" href="css/global.css" />
+		<link rel="stylesheet" type="text/css" href="css/element-display.css" />
+		<link rel="stylesheet" type="text/css" href="css/bootstrap3-wysihtml5.css" />
+		<script src="js/jquery-3.6.0.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/element.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/bootstrap3-wysihtml5.all.js" type="text/javascript" charset="utf-8"></script>
+		<title>博客编辑上传</title>
+		<style type="text/css">
+			#editor {
+				height: 500px;
+				border-radius: 8px;
+				border-style: solid;
+				border-color: #8a8a8a;
+				box-shadow: 0px 0px 8px #414141;
+				background-color: rgba(255, 255, 255, 0.2);
+			}
+
+			#editor:focus {
+				background-color: white;
+			}
+
+			input {
+				background-color: unset;
+				border-radius: 8px;
+				border-style: solid;
+				border-color: #8a8a8a;
+				box-shadow: 0px 0px 8px #414141;
+				background-color: rgba(255, 255, 255, 0.2);
+				height: 48px;
+				font-size: 24px;
+				margin-top: 5px;
+				margin-bottom: 8px;
+			}
+
+			input:focus {
+				background-color: white;
+			}
+
+			
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<h1 class="page-header text-center">博客上传</h1>
+			<div style="height: 30px;"> </div>
+
+			<div class="container">
+				<h2>博客标题</h2>
+				<input type="text" class="col-xs-12" placeholder="请输入博客标题" name="" id="" value="" />
+				<h2>说明</h2>
+				<input type="text" class="col-xs-12" placeholder="对博客进行简要说明" name="" id="" value="" />
+				<h2>正文</h2>
+				<div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor">
+				</div>
+				<div id="editor">
+
+				</div>
+			</div>
+
+		</div>
+
+		<script type="text/javascript">
+			$('#editor').wysihtml5();
+		</script>
+
+	</body>
+</html>
