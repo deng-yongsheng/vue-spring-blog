@@ -11,6 +11,7 @@
 		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/element.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/axios.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/token.js" type="text/javascript" charset="utf-8"></script>
 		<title>登录</title>
 		<style type="text/css">
 			.login-container {
@@ -83,14 +84,21 @@
 						this.$refs.ruleForm2.validate((valid) => {
 							if (valid) {
 								this.logining = true;
-								axios.get('/api/login', {
+								axios.get('/api/user/login', {
 									params: {
 										username: this.ruleForm2.username,
 										password: this.ruleForm2.password,
 									}
 								}).then(resp => {
 									this.logining = false;
-									console.log(resp);
+									// console.log(resp);
+									if(resp.data.username!=undefined){
+										this.$alert('登录成功');
+										setToken(resp.data.username);
+										redirect('/');
+									}else{
+										this.$alert(resp.data);
+									}
 								}).catch(error => {
 									this.logining = false;
 									console.log(error);
