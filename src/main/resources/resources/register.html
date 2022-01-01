@@ -21,24 +21,31 @@
 			#rigisterapp label {
 				font-size: 16px;
 			}
+
+			.el-input,
+			.el-input input[type=password] {
+				letter-spacing: 5px;
+				/* font-weight: bold; */
+				font-size: 20px;
+			}
 		</style>
 	</head>
 	<body>
 		<div class="container">
 			<h1 class="page-header text-center">欢迎注册</h1>
 			<div id="rigisterapp" class="center-block">
-				<el-form :label-position="labelPosition" label-width="80px" label-position="left">
+				<el-form :label-position="'left'" label-width="80px" label-position="left">
 					<el-form-item label="用户名">
-						<el-input v-model="username"></el-input>
+						<el-input v-model="username" id="username" @blur="checkNameIsUsed"></el-input>
 					</el-form-item>
 					<el-form-item label="密码">
-						<el-input v-model="password"></el-input>
+						<el-input v-model="password" id="password" type='password'></el-input>
 					</el-form-item>
 					<el-form-item label="重复密码">
-						<el-input v-model="retype_password"></el-input>
+						<el-input v-model="retype_password" type='password'></el-input>
 					</el-form-item>
 					<el-row type="flex" justify="center">
-						<el-button type="primary" @click="submitForm('ruleForm')">立即注册</el-button>
+						<el-button type="primary" @click="submit">立即注册</el-button>
 						<el-button type="default">
 							<el-link href="login.html">转到登录</el-link>
 						</el-button>
@@ -54,6 +61,72 @@
 					username: '',
 					password: '',
 					retype_password: '',
+				},
+				methods: {
+					checkNameIsUsed() {
+						if (this.username != undefined && this.username.length > 0) {
+							if (this.username.length < 5) {
+								this.$alert('用户名太短', '提示', {
+									confirmButtonText: '确定',
+									callback() {
+										$("#username").focus();
+									}
+								});
+							} else {
+								axios.get('/api/user/exists', {
+									params: {
+										username: this.username,
+									}
+								}).then(resp => {
+									if (resp.data == false) {
+										this.$alert('用户名重复，请使用其它用户名', '提示', {
+											confirmButtonText: '确定',
+											callback() {
+												$("#username").focus();
+											}
+										});
+									}
+								});
+							}
+						}
+					},
+					submit() {
+						if (this.username != undefined && this.username.length >= 5) {
+							if (this.password == this.retype_password) {
+								axios.get('/api/user/register',{
+									params:{
+										username:this.username,
+										password:this.password,
+									}
+								}).then(resp=>{
+									if(resp.data.indexOf('成功')>-1){
+										this.$alert('注册成功！', '提示', {
+											confirmButtonText: '确定',
+											callback() {
+												location.href = '/login';
+											}
+										});
+									}
+								}).catch(error=>{
+									this.$alert(error);
+								})
+							} else {
+								this.$alert('两次密码输入不一致，请检查后重新输入', '提示', {
+									confirmButtonText: '确定',
+									callback() {
+										$('#password').focus();
+									}
+								});
+							}
+						}else if(this.username != undefined && this.username.length > 0){
+							this.$alert('用户名太短，需要大于5个字符', '提示', {
+								confirmButtonText: '确定',
+								callback() {
+									$("#username").focus();
+								}
+							});
+						}
+					},
 				}
 			});
 		</script>
