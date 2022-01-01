@@ -14,7 +14,7 @@ public interface UserMapper {
     用户注册模块
      */
     @Insert("insert into user(username,password) values(#{username},#{password})")
-    int register(String username, String password);
+    int register( @Param("username") String username, @Param("password") String password);
 
     //根据用户名查找用户信息
     @Select("select * from user where username = #{username}")
