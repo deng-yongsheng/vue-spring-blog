@@ -24,11 +24,13 @@
 				padding: 10px;
 				border-radius: 8px;
 				box-shadow: 0px 0px 2px #e2e2e2;
+				background-color: rgba(255, 255, 255, 0.2);
 			}
 
 			#articleapp .article:hover {
 				transition-duration: 0.5s;
 				box-shadow: 0px 0px 5px #888888;
+				background-color: white;
 			}
 
 			#articleapp .author {
@@ -56,14 +58,14 @@
 			<h1 class="page-header text-center">最新文章</h1>
 			<div style="height: 30px;"> </div>
 			<div class="container" id="articleapp">
-				<el-row :gutter="20" type="flex" class="article" v-for="article in articleList">
+				<el-row :gutter="20" type="flex" @click.native="clickArticle(article.title)" class="article" v-for="article in articleList">
 					<el-col :xs="18" :sm="16">
 						<div>
 							<el-link class="title" :underline="false"> {{ article.title }} </el-link>
 						</div>
 						<div> {{ article.detail }} </div>
 					</el-col>
-					<el-col :xs="6" :sm="4" class="author">
+					<el-col :xs="6" :sm="4" class="author" @click.native.stop="clickAuthor(article.author)" >
 						{{ article.author }}
 					</el-col>
 					<el-col :xs="0" :sm="4" class="time hidden-xs-only">
@@ -102,6 +104,14 @@
 							time: "2021-12-29"
 						},
 					],
+				},
+				methods:{
+					clickArticle(title){
+						alert(title);
+					},
+					clickAuthor(author){
+						alert(author);
+					}
 				}
 			})
 		</script>
