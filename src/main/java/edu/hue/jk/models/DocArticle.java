@@ -1,6 +1,7 @@
 package edu.hue.jk.models;
 
 import lombok.Data;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.sql.Date;
@@ -9,6 +10,7 @@ import java.sql.Date;
 @Document
 public class DocArticle {
 
+    @Id
     String id;
     String title;
     Date time;
