@@ -94,9 +94,9 @@
 									// console.log(resp);
 									if(resp.data.username!=undefined){
 										this.$alert('登录成功');
-										setToken(resp.data.username);
-										// redirect('/');
-										history.back();
+										setToken(resp.data.userid,resp.data.username);
+										// 跳转到一个页面
+										location.href = document.referrer;
 									}else{
 										this.$alert(resp.data);
 									}
