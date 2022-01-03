@@ -2,8 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8">
-		<meta name="viewport"
-			content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
 		<link rel="stylesheet" type="text/css" href="css/element.css" />
 		<link rel="stylesheet" type="text/css" href="css/global.css" />
@@ -13,6 +12,7 @@
 		<script src="js/element.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/token.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/axios.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/qs.js" type="text/javascript" charset="utf-8"></script>
 		<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
 		<link rel="stylesheet" type="text/css" href="/css/element.css" />
 		<link rel="stylesheet" type="text/css" href="/css/global.css" />
@@ -23,6 +23,7 @@
 		<script src="/js/element.js" type="text/javascript" charset="utf-8"></script>
 		<script src="/js/token.js" type="text/javascript" charset="utf-8"></script>
 		<script src="/js/axios.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/js/qs.js" type="text/javascript" charset="utf-8"></script>
 		<title th:text="*{title}">文章标题</title>
 		<style type="text/css">
 			body {
@@ -32,7 +33,7 @@
 
 			.description {
 				display: block;
-				width: -webkit-fit-content;
+				width: fit-content;
 				margin: auto;
 				font-size: 14px;
 			}
@@ -46,8 +47,8 @@
 		<div class="container">
 			<h1 class="page-header text-center" th:text="*{title}">文章标题</h1>
 			<div class="description">
-				<span th:text="*{description}">描述</span>|
-				<span th:text="*{description}">作者</span>|
+				<!-- 	<p th:text="*{description}">描述</p> -->
+				<span th:text="*{username}">作者</span>|
 				<span th:text="*{#dates.format(time,'yyyy-MM-dd HH:mm:ss')}">发布时间</span>
 			</div>
 
@@ -55,28 +56,63 @@
 			<div class="container" th:utext="*{content}">
 				文章正文
 			</div>
+			<!-- 分割线 -->
+			<hr style="height: 1px;margin-top: 30px;" color="#868686" width="80%" size="3" />
 			<div id="comment">
 				<el-row :gutter="10">
-					<el-col :span="4" :xs="6"  style="text-align: right;margin-top: 8px;">发表评论：</el-col>
-					<el-col :span="19" :xs="12"><el-input v-model="mycomment"></el-input></el-col>
-					<el-col :span="1" :xs="6"><el-button @disabled="canPub">发送</el-button></el-col>
+					<el-col :span="4" :xs="6" style="text-align: right;margin-top: 8px;">发表评论：</el-col>
+					<el-col :span="18" :xs="12">
+						<el-input v-model="mycomment"></el-input>
+					</el-col>
+					<el-col :span="2" :xs="6">
+						<el-button :disabled="canPub" @click="pub">发送</el-button>
+					</el-col>
 				</el-row>
 			</div>
 		</div>
-		
-		
+
+
 		<script type="text/javascript">
 			var app = new Vue({
-				el:'#comment',
-				data:{
-					mycomment:''
+				el: '#comment',
+				data: {
+					articleid: '[[*{id}]]',
+					mycomment: ''
 				},
-				computed:{
-					canPub(){
-						return this.mycomment.length==0;
+				computed: {
+					canPub() {
+						return this.mycomment.length == 0;
 					}
+				},
+				methods: {
+					pub() {
+						axios({
+							url: '/api/addcomment',
+							method: 'POST',
+							headers: {
+								'Content-Type': 'application/x-www-form-urlencoded'
+							},
+							data: Qs.stringify({
+								articleid: this.articleid,
+								userid: (hasToken() ? getUserId() : ''),
+								content: this.mycomment,
+							})
+						}).then(resp => {
+							if (resp.data.indexOf('成功') > 0) {
+								this.$message({
+									message: resp.data,
+									type: 'success'
+								});
+							} else {
+								this.$message({
+									message: resp.data,
+									type: 'warning'
+								});
+							}
+						})
+					},
 				}
-			})
+			});
 		</script>
 	</body>
 </html>

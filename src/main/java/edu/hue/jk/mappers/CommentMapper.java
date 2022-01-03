@@ -27,7 +27,7 @@ public interface CommentMapper {
      */
     //插入一条用户评论记录
     @Insert("insert into comment(userid, articleid, content) values (#{userid}, #{articleid}, #{content})")
-    int add(Integer userid, String articleid, String content);
+    int add(@Param("userid") Integer userid,@Param("articleid") String articleid,@Param("content") String content);
 
     /*
     删除评论模块

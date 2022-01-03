@@ -6,9 +6,7 @@ import edu.hue.jk.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -34,7 +32,7 @@ public class CommentController {
      */
     @GetMapping("/searchAllCommmentByAIdandUId")
     @ResponseBody
-    public String searchAllCommmentByAIdandUId(Model model, String articleid, Integer userid){
+    public String searchAllCommmentByAIdandUId(Model model, String articleid, Integer userid) {
         List<Comment> commentList = commentMapper.getCommentListByAIdandUId(articleid, userid);
         return commentList.toString();
     }
@@ -44,7 +42,7 @@ public class CommentController {
      */
     @GetMapping("/searchUniqueComment")
     @ResponseBody
-    public String searchUniqueComment(Model model,String articleid, Integer userid, Integer id){
+    public String searchUniqueComment(Model model, String articleid, Integer userid, Integer id) {
         Comment commentList = commentMapper.getUniqueComment(articleid, userid, id);
         return commentList.toString();
     }
@@ -53,9 +51,9 @@ public class CommentController {
     /*
     功能：插入一条用户评论记录（测试成功）
      */
-    @GetMapping("/addcomment")
+    @PostMapping("/addcomment")
     @ResponseBody
-    public String addcomment(Integer userid, String articleid, String content) {
+    public String addcomment(@RequestParam String articleid, @RequestParam String content, @RequestParam Integer userid) {
         int isadd = commentMapper.add(userid, articleid, content);
         if (isadd > 0) {
             return "评论成功!";
@@ -63,6 +61,7 @@ public class CommentController {
             return "评论失败!";
         }
     }
+
     //删除评论模块
     /*
     功能：根据评论编号和文章编号删除一条评论（测试成功）
