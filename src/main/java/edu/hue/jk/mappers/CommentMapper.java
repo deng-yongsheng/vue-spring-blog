@@ -12,7 +12,7 @@ public interface CommentMapper {
      */
     //根据文章编号查询评论相关信息
     @Select("select * from comment where articleid=#{articleid}")
-    List<Comment> getCommnentListByArticleId(String articleid);
+    List<Comment> getCommnentListByArticleId(@Param("articleid") String articleid);
 
     //根据文章编号和用户编号查询某文章下对应用户的所有评论信息
     @Select("select * from comment where articleid=#{articleid} and userid = #{userid}")
