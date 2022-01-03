@@ -77,7 +77,7 @@
 			<h1 class="page-header text-center">最新文章</h1>
 			<div style="height: 30px;"> </div>
 			<div class="container" id="articleapp">
-				<el-row :gutter="20" type="flex" @click.native="clickArticle(article.title)" class="article"
+				<el-row :gutter="20" type="flex" @click.native="clickArticle(article.id)" class="article"
 					v-for="article in articleList">
 					<el-col :xs="18" :sm="16">
 						<div>
@@ -108,17 +108,18 @@
 					}, ],
 				},
 				methods: {
-					clickArticle(title) {
-						alert(title);
+					clickArticle(articleid) {
+						// alert(title);
+						location.href = '/article/'+articleid;
 					},
 					clickAuthor(username) {
 						alert(username);
 					}
 				},
-				mounted(){
-					axios.get("/article/getAll").then(resp=>{
+				mounted() {
+					axios.get("/article/getAll").then(resp => {
 						console.log(resp.data);
-						resp.data.forEach(item=>{
+						resp.data.forEach(item => {
 							item.time = item.time.split(' ')[0];
 						})
 						console.log(resp.data);
