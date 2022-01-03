@@ -17,7 +17,6 @@ public interface AriticleMapper {
      * 查询系统内所有文章
      * @return
      */
-    //查询系统内所有文章
     @Select("select * from article")
     List<Article> getAllArticle();
     //根据用户id号获取某个用户的所有文章
