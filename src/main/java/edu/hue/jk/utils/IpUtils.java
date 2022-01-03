@@ -4,6 +4,12 @@ import javax.servlet.http.HttpServletRequest;
 
 public class IpUtils {
 
+    /**
+     * 根据用户请求获取用户ip, 如果使用代理则获取源ip
+     *
+     * @param request 用户请求
+     * @return
+     */
     public static String getRealIp(HttpServletRequest request) {
         String ip = null;
 
