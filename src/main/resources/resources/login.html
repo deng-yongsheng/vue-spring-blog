@@ -95,7 +95,8 @@
 									if(resp.data.username!=undefined){
 										this.$alert('登录成功');
 										setToken(resp.data.username);
-										redirect('/');
+										// redirect('/');
+										history.back();
 									}else{
 										this.$alert(resp.data);
 									}

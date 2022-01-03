@@ -18,16 +18,16 @@ function getToken() {
 	}
 }
 
-function setRedirect(url) {
-	sessionStorage.setItem('RedirectUrl', url);
-}
+// function setRedirect(url) {
+// 	sessionStorage.setItem('RedirectUrl', url);
+// }
 
-function redirect(defaultUrl) {
-	var lastUrl = sessionStorage.getItem('RedirectUrl');
-	if (lastUrl !== null) {
-		sessionStorage.removeItem('RedirectUrl')
-		location.href = lastUrl;
-	} else {
-		location.href = defaultUrl;
-	}
-}
+// function redirect(defaultUrl) {
+// 	var lastUrl = sessionStorage.getItem('RedirectUrl');
+// 	if (lastUrl !== null) {
+// 		sessionStorage.removeItem('RedirectUrl')
+// 		location.href = lastUrl;
+// 	} else {
+// 		location.href = defaultUrl;
+// 	}
+// }

@@ -71,18 +71,35 @@
 				box-shadow: 0px 0px 8px #414141;
 				color: #464646;
 			}
+
+			#login {
+				float: right;
+				width: -webkit-fit-content;
+				position: relative;
+
+			}
+
+			#login a {
+				color: #000000;
+				margin-right: 10px;
+			}
 		</style>
 	</head>
 	<body>
 		<div class="container">
-			<h1 class="page-header text-center">博客上传</h1>
+			<div id="login" class="container">
+				<a v-text="getUserName">用户名</a>
+				<a href="/">返回主页</a>
+			</div>
+			<h1 class="page-header text-center" id="title" v-text="'博客上传-'+getUserName">博客上传</h1>
 			<div style="height: 30px;"> </div>
 
 			<div class="container" id="blog-editor">
 				<h2>博客标题</h2>
 				<el-input type="text" id="title" class="col-xs-12" placeholder="请输入博客标题" v-model="title"></el-input>
 				<h2>说明</h2>
-				<el-input type="text" id="description" class="col-xs-12" placeholder="对博客进行简要说明" v-model="description"></el-input>
+				<el-input type="text" id="description" class="col-xs-12" placeholder="对博客进行简要说明" v-model="description">
+				</el-input>
 				<h2>正文</h2>
 				<div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor">
 				</div>
@@ -108,6 +125,7 @@
 					description: '',
 					html: '',
 					editor: null,
+
 				},
 				methods: {
 					textChange() {
@@ -138,15 +156,16 @@
 					}
 				},
 				created() {
-					if(!hasToken()){
-						this.$alert("请先登录",'提示',{
+					if (!hasToken()) {
+						this.$alert("请先登录", '提示', {
 							confirmButtonText: '确定',
 							callback() {
 								setRedirect(location.href);
 								location.href = '/login';
 							}
 						});
-						
+					} else {
+						this.iflogin = true;
 					}
 				},
 				mounted() {
@@ -160,7 +179,15 @@
 					$('#editor').on('input', this.textChange);
 					this.editor.setValue(this.html);
 				}
-			})
+			});
+			var loginApp = new Vue({
+				el: '#title, #login',
+				computed: {
+					getUserName() {
+						return app.iflogin ? getToken() : null;
+					}
+				}
+			});
 		</script>
 
 	</body>
