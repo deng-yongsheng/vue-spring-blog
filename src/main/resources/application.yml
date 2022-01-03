@@ -12,7 +12,8 @@ spring:
     view:
       suffix: .html
   resources:
-    static-locations: classpath:/resources/
+#    static-locations: classpath:/resources/
+    static-locations: file:C:\Users\Administrator\Desktop\java-ee-training\src\main\resources\resources
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://dengyongsheng.cn:3306/blog?serverTimezone=GMT%2B8&characterEncoding=utf-8&useSSL=false&createDatabaseIfNotExist=true
