@@ -58,7 +58,13 @@ public class ArticleController {
         return articleList.toString();
     }
 
-    //根据标题和用户id查询文章
+    /**
+     * 根据标题和用户id查询文章
+     * @param model
+     * @param title
+     * @param userid
+     * @return
+     */
     @GetMapping("/selectArticlesByTitleandUserid")
     @ResponseBody
     public String selectArticlesByTitleandUserid(Model model, String title, Integer userid) {
