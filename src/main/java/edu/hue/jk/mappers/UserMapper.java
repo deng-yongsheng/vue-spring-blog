@@ -5,8 +5,11 @@ import org.apache.ibatis.annotations.*;
 
 @Mapper
 public interface UserMapper {
-    /*
-    用户登录模块
+    /**
+     * 用户登录
+     * @param username 用户名
+     * @param password 密码
+     * @return
      */
     @Select("select * from user where username=#{username} and password=#{password}")
     User login(@Param("username") String username, @Param("password") String password);
