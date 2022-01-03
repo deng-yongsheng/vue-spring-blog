@@ -23,8 +23,13 @@ public interface CommentMapper {
      */
     @Select("select * from comment where articleid=#{articleid} and userid = #{userid}")
     List<Comment> getCommentListByAIdandUId(String articleid, Integer userid);
-
-    //根据评论编号、文章编号以及用户编号查询某文章下对应用户的唯一评论
+    /**
+     * 根据评论编号、文章编号以及用户编号查询某文章下对应用户的唯一评论
+     * @param articleid 文章编号
+     * @param userid 用户编号
+     * @param id 评论编号
+     * @return
+     */
     @Select("select * from comment where articleid=#{articleid} and userid=#{userid} and id=#{id}")
     Comment getUniqueComment(String articleid, Integer userid, Integer id);
 
