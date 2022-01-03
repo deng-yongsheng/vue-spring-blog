@@ -13,8 +13,11 @@ public interface UserMapper {
      */
     @Select("select * from user where username=#{username} and password=#{password}")
     User login(@Param("username") String username, @Param("password") String password);
-    /*
-    用户注册模块
+    /**
+     * 用户注册
+     * @param username 用户名
+     * @param password 密码
+     * @return
      */
     @Insert("insert into user(username,password) values(#{username},#{password})")
     int register( @Param("username") String username, @Param("password") String password);
