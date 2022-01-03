@@ -6,6 +6,7 @@
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
 		<link rel="stylesheet" type="text/css" href="css/element.css" />
 		<link rel="stylesheet" type="text/css" href="css/global.css" />
+		<link rel="stylesheet" type="text/css" href="css/element-display.css" />
 		<script src="js/jquery-3.6.0.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
@@ -13,10 +14,11 @@
 		<script src="js/token.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/axios.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/qs.js" type="text/javascript" charset="utf-8"></script>
+
 		<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
 		<link rel="stylesheet" type="text/css" href="/css/element.css" />
 		<link rel="stylesheet" type="text/css" href="/css/global.css" />
-
+		<link rel="stylesheet" type="text/css" href="/css/element-display.css" />
 		<script src="/js/jquery-3.6.0.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="/js/vue.js" type="text/javascript" charset="utf-8"></script>
@@ -40,6 +42,10 @@
 
 			#comment {
 				font-size: 18px;
+			}
+
+			.comment-item {
+				margin-top: 20px;
 			}
 		</style>
 	</head>
@@ -68,16 +74,33 @@
 						<el-button :disabled="canPub" @click="pub">发送</el-button>
 					</el-col>
 				</el-row>
+				<div class="comment-item" v-for="com in commentList">
+					<el-row>
+						<el-col v-text="'来自'+com.ip+'用户的评论:'" v-if="com.ip!='我'" style="font-size: 16px;">ip的评论</el-col>
+						<el-col v-text="'我的评论：'" v-if="com.ip=='我'" style="font-size: 16px;color: red;"></el-col>
+					</el-row>
+					<el-row>
+						<el-col :xs="{span: 20, offset: 4}" :sm="{span:18,offset:6}" :md="{span: 16, offset: 4}" v-text="com.content">
+						</el-col>
+						<el-col class="hidden-sm-and-down" :md="4" v-text="com.time" style="font-size: 16px;">2022-01-03 19:59:59</el-col>
+					</el-row>
+				</div>
 			</div>
 		</div>
-
 
 		<script type="text/javascript">
 			var app = new Vue({
 				el: '#comment',
 				data: {
 					articleid: '[[*{id}]]',
-					mycomment: ''
+					mycomment: '',
+					commentList: [{
+						id: 'userid',
+						articleid: 'articleid',
+						time: '评论时间',
+						content: '评论内容',
+						ip: '127.0.0.1',
+					}, ]
 				},
 				computed: {
 					canPub() {
@@ -103,6 +126,13 @@
 									message: resp.data,
 									type: 'success'
 								});
+								this.commentList.unshift({
+									articleid: this.articleid,
+									userid: (hasToken() ? getUserId() : ''),
+									content: this.mycomment,
+									time: '刚刚',
+									ip: '我',
+								});
 							} else {
 								this.$message({
 									message: resp.data,
@@ -111,6 +141,16 @@
 							}
 						})
 					},
+				},
+				mounted() {
+					// 加载评论
+					axios.get('/api/searchAllComByArticleId', {
+						params: {
+							id: this.articleid
+						}
+					}).then(resp => {
+						this.commentList = resp.data;
+					})
 				}
 			});
 		</script>
