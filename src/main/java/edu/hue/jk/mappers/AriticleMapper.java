@@ -19,7 +19,12 @@ public interface AriticleMapper {
      */
     @Select("select * from article")
     List<Article> getAllArticle();
-    //根据用户id号获取某个用户的所有文章
+
+    /**
+     * 根据用户id号获取某个用户的所有文章
+     * @param userid
+     * @return
+     */
     @Select("select * from article where userid =#{userid}")
     List<Article> getArticlesByid(Integer userid);
     //根据标题查询系统内的所有同名文章
