@@ -21,8 +21,11 @@ public interface UserMapper {
      */
     @Insert("insert into user(username,password) values(#{username},#{password})")
     int register( @Param("username") String username, @Param("password") String password);
-
-    //根据用户名查找用户信息
+    /**
+     * 根据用户名查找用户信息
+     * @param username 用户名
+     * @return
+     */
     @Select("select * from user where username = #{username}")
     User getUserByName(String username);
 
