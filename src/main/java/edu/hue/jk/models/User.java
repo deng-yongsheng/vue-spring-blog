@@ -1,6 +1,7 @@
 package edu.hue.jk.models;
 
 import lombok.Data;
+import net.minidev.json.annotate.JsonIgnore;
 
 import java.util.List;
 
@@ -8,18 +9,8 @@ import java.util.List;
 public class User {
     Integer id;
     String username;
+    @JsonIgnore
     String password;
     String usertype;
-
-    @Override
-    public String toString() {
-        return "{" +
-                "\"id\":\"" + id +
-                "\", \"username\":\"" + username +
-                "\", \"password\":\"" + password +
-                "\", \"usertype\":\"" + usertype +
-                "\", \"articles\":\"" + articles + "\"}";
-    }
-
     List<Article> articles;
 }

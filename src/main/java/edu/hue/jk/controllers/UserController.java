@@ -1,5 +1,7 @@
 package edu.hue.jk.controllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.hue.jk.mappers.UserMapper;
 import edu.hue.jk.models.User;
 import org.apache.ibatis.annotations.Delete;
@@ -17,17 +19,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class UserController {
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private ObjectMapper objectMapper;
 
     @GetMapping("/login")
     @ResponseBody
     //登录模块
-    public String login(@RequestParam String username, @RequestParam String password) {
+    public String login(@RequestParam String username, @RequestParam String password) throws JsonProcessingException {
         if (username == null || password == null || username.length() == 0 || password.length() == 0) {
             return "用户和密码不能为空！";
         }
         User loginUser = userMapper.login(username, password);
         if (loginUser != null) {
-            return loginUser.toString();
+            return objectMapper.writeValueAsString(loginUser);
         } else {
             return "用户名或者密码错误！";
         }
@@ -62,9 +66,9 @@ public class UserController {
     //根据用户名查找用户信息
     @GetMapping("/selectUserInfoByUserid")
     @ResponseBody
-    public String selectUserInfoByUserid(String username) {
+    public String selectUserInfoByUserid(String username) throws JsonProcessingException {
         User userinfo = userMapper.getUserByName(username);
-        return userinfo.toString();
+        return objectMapper.writeValueAsString(userinfo);
     }
 
     //删除用户
