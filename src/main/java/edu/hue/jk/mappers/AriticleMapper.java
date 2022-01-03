@@ -59,14 +59,6 @@ public interface AriticleMapper {
      * @param userid
      * @return
      */
-
-
-
-
-    /*
-    删除文章模块
-     */
-    //根据用户id号删除指定用户的所有文章
     @Delete("delete from article where userid = #{userid}")
     int delByUserid(Integer userid);
     //根据文章id号删除文章
