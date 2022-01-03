@@ -24,7 +24,12 @@ public class UserController {
 
     @GetMapping("/login")
     @ResponseBody
-    //登录模块
+    /**
+     * 用户登录
+     * @param username 用户名
+     * @param password 密码
+     * @return
+     */
     public String login(@RequestParam String username, @RequestParam String password) throws JsonProcessingException {
         if (username == null || password == null || username.length() == 0 || password.length() == 0) {
             return "用户和密码不能为空！";
