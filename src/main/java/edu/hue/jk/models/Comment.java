@@ -11,6 +11,7 @@ public class Comment {
     Integer articleid;
     Date time;
     String content;
+    String ip;
 
     @Override
     public String toString() {
