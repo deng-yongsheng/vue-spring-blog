@@ -74,8 +74,11 @@ public class UserController {
             return false;
         }
     }
-
-    //根据用户名查找用户信息
+    /**
+     * 根据用户名查找用户信息
+     * @param username 用户名
+     * @return
+     */
     @GetMapping("/selectUserInfoByUserid")
     @ResponseBody
     public String selectUserInfoByUserid(String username) throws JsonProcessingException {
