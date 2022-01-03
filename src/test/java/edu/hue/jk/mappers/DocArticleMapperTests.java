@@ -23,18 +23,18 @@ public class DocArticleMapperTests {
     private MongoOperations mongoOperations;
 
 
-    /**
-     * 插入一条新闻记录
-     */
-    @Test
-    public void insertTest() {
-        DocArticle docArticle = new DocArticle();
-        docArticle.setTitle("132测试的一篇文章标题");
-        docArticle.setContent("123测试的一篇文章正文");
-        docArticle.setId(UUID.randomUUID().toString());
-        docArticle.setUserid(123);
-        mongoOperations.save(docArticle, "article");
-    }
+//    /**
+//     * 插入一条新闻记录
+//     */
+//    @Test
+//    public void insertTest() {
+//        DocArticle docArticle = new DocArticle();
+//        docArticle.setTitle("132测试的一篇文章标题");
+//        docArticle.setContent("123测试的一篇文章正文");
+//        docArticle.setId(UUID.randomUUID().toString());
+//        docArticle.setUserid(123);
+//        mongoOperations.save(docArticle, "article");
+//    }
 
     /**
      * 输出所有的文章信息
@@ -64,11 +64,13 @@ public class DocArticleMapperTests {
         System.out.println(docArticle);
     }
 
-//    /**
-//     * 删除全部的文章
-//     */
-//    @Test
-//    public void deleteAll() {
-//        mongoOperations.remove(DocArticle.class);
-//    }
+    /**
+     * 删除全部的文章
+     */
+    @Test
+    public void deleteAll() {
+        Query query = new Query();
+
+        mongoOperations.remove(DocArticle.class);
+    }
 }
