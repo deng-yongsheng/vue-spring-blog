@@ -61,13 +61,12 @@ public interface AriticleMapper {
      */
     @Delete("delete from article where userid = #{userid}")
     int delByUserid(Integer userid);
-    //根据文章id号删除文章
+
+    /**
+     * 根据文章id号删除文章
+     * @param id
+     * @return
+     */
     @Delete("delete from article where id = #{id}")
     int delByid(String id);
-
-
-    /*
-    编辑文章模块
-     */
-
 }
