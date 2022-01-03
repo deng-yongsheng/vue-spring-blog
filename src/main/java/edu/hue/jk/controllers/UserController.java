@@ -85,8 +85,12 @@ public class UserController {
         User userinfo = userMapper.getUserByName(username);
         return objectMapper.writeValueAsString(userinfo);
     }
-
-    //删除用户
+    /**
+     * 删除用户
+     * @param username 用户名
+     * @param password 密码
+     * @return
+     */
     @GetMapping("/delUserInfo")
     @ResponseBody
     public String delUserInfo(String username, String password) {
