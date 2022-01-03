@@ -45,7 +45,12 @@ public class ArticleController {
         return articleList.toString();
     }
 
-    //根据标题查询系统内的所有同名文章
+    /**
+     * 根据标题查询系统内的所有同名文章
+     * @param model
+     * @param title
+     * @return
+     */
     @GetMapping("/selectArticlesByTitle")
     @ResponseBody
     public String selectArticlesByTitle(Model model, String title) {
