@@ -63,5 +63,11 @@ public class DocArticleController {
         }
     }
 
+    @RequestMapping("getAll")
+    @ResponseBody
+    public String getAll(){
+        return "";
+    }
+
 
 }
