@@ -42,7 +42,6 @@ public interface CommentMapper {
      * @param content 评论内容
      * @return
      */
-    //插入一条用户评论记录
     @Insert("insert into comment(userid, articleid, content,ip) values (#{userid}, #{articleid}, #{content},#{ip})")
     int add(@Param("ip") String ip, @Param("userid") Integer userid, @Param("articleid") String articleid, @Param("content") String content);
 
