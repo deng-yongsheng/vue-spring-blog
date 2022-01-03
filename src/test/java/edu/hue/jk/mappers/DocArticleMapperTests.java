@@ -22,12 +22,12 @@ public class DocArticleMapperTests {
     @Autowired
     private MongoOperations mongoOperations;
 
-    @Test
+
     /**
      * 插入一条新闻记录
      */
+    @Test
     public void insertTest() {
-
         DocArticle docArticle = new DocArticle();
         docArticle.setTitle("132测试的一篇文章标题");
         docArticle.setContent("123测试的一篇文章正文");
@@ -36,31 +36,39 @@ public class DocArticleMapperTests {
         mongoOperations.save(docArticle, "article");
     }
 
-    @Test
     /**
      * 输出所有的文章信息
      */
+    @Test
     public void findTest() {
         List<DocArticle> docArticleList = mongoOperations.findAll(DocArticle.class, "article");
         System.out.println(docArticleList.size());
         System.out.println(docArticleList);
     }
 
-    @Test
     /**
      * 查询指定id的文章
      */
+    @Test
     public void findArticleByid() {
         DocArticle docArticle = mongoOperations.findById("2e3a3acd-44b5-4793-914c-608a5d75b66c", DocArticle.class, "article");
         System.out.println(docArticle);
     }
 
-    @Test
     /**
      * 查询指定用户id的文章
      */
+    @Test
     public void findArticleByUserid() {
         DocArticle docArticle = mongoOperations.findOne(new Query(Criteria.where("userid").is(Integer.valueOf(123))), DocArticle.class, "article");
         System.out.println(docArticle);
     }
+
+//    /**
+//     * 删除全部的文章
+//     */
+//    @Test
+//    public void deleteAll() {
+//        mongoOperations.remove(DocArticle.class);
+//    }
 }
