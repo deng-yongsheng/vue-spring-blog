@@ -64,18 +64,18 @@ public class Migration {
                 "ENGINE=InnoDB\n" +
                 ";\n");
         // 创建评论表
-        st.executeUpdate("CREATE TABLE if not exists `comment` (\n" +
+        st.executeUpdate("CREATE TABLE `comment` (\n" +
                 "\t`id` INT(11) NOT NULL AUTO_INCREMENT,\n" +
                 "\t`userid` INT(11) NULL DEFAULT NULL,\n" +
                 "\t`articleid` CHAR(50) NOT NULL COLLATE 'utf8mb4_general_ci',\n" +
-                "\t`time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,\n" +
-                "\t`content` TEXT NOT NULL COLLATE 'utf8mb4_general_ci',\n" +
+                "\t`time` DATETIME NOT NULL DEFAULT current_timestamp(),\n" +
+                "\t`content` TINYTEXT NOT NULL COLLATE 'utf8mb4_general_ci',\n" +
+                "\t`ip` TINYTEXT NOT NULL COLLATE 'utf8mb4_general_ci',\n" +
                 "\tPRIMARY KEY (`id`) USING BTREE,\n" +
                 "\tINDEX `articleid` (`articleid`) USING BTREE\n" +
                 ")\n" +
                 "COLLATE='utf8mb4_general_ci'\n" +
                 "ENGINE=InnoDB\n" +
-                "AUTO_INCREMENT=2\n" +
                 ";\n");
         // 插入一个默认用户
         st.executeUpdate("INSERT IGNORE INTO `user` (`id`, `username`, `password`, `usertype`) VALUES\n" +
