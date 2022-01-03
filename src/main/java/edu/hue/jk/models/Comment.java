@@ -1,5 +1,6 @@
 package edu.hue.jk.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.util.Date;
@@ -8,18 +9,10 @@ import java.util.Date;
 public class Comment {
     Integer id;
     Integer userid;
-    Integer articleid;
+    String articleid;
+
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     Date time;
     String content;
     String ip;
-
-    @Override
-    public String toString() {
-        return "Comment{" +
-                "\"id\"=\"" + id +
-                "\", \"userid\"=\"" + userid +
-                "\", \"articleid\"=\"" + articleid +
-                "\", \"time\"=\"" + time +
-                "\", \"content\"=\"" + content + "\"}";
-    }
 }
