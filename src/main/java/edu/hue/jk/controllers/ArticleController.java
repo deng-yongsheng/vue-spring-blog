@@ -72,7 +72,11 @@ public class ArticleController {
         return articleList.toString();
     }
 
-    //根据文章id查询对应文章
+    /**
+     * 根据文章id查询对应文章
+     * @param id
+     * @return
+     */
     @GetMapping("/selectArticlesById")
     @ResponseBody
     public String selectArticlesById(String id) {
