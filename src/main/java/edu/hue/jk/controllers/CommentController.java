@@ -1,5 +1,7 @@
 package edu.hue.jk.controllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.hue.jk.mappers.CommentMapper;
 import edu.hue.jk.models.Comment;
 import edu.hue.jk.models.User;
@@ -17,6 +19,8 @@ import java.util.List;
 public class CommentController {
     @Autowired
     private CommentMapper commentMapper;
+    @Autowired
+    private ObjectMapper objectMapper;
 
     /**
      * 根据文章编号查询相关的评论信息（测试成功）
@@ -26,9 +30,9 @@ public class CommentController {
      */
     @GetMapping("/searchAllComByArticleId")
     @ResponseBody
-    public String searchAllComByArticleId(@RequestParam String articleid) {
+    public String searchAllComByArticleId(@RequestParam("id") String articleid) throws JsonProcessingException {
         List<Comment> commentList = commentMapper.getCommnentListByArticleId(articleid);
-        return commentList.toString();
+        return objectMapper.writeValueAsString(commentList);
     }
 
     /**
@@ -40,9 +44,9 @@ public class CommentController {
      */
     @GetMapping("/searchAllCommmentByAIdandUId")
     @ResponseBody
-    public String searchAllCommmentByAIdandUId(@RequestParam String articleid, @RequestParam Integer userid) {
+    public String searchAllCommmentByAIdandUId(@RequestParam String articleid, @RequestParam Integer userid) throws JsonProcessingException {
         List<Comment> commentList = commentMapper.getCommentListByAIdandUId(articleid, userid);
-        return commentList.toString();
+        return objectMapper.writeValueAsString(commentList);
     }
 
     /**
@@ -55,9 +59,9 @@ public class CommentController {
      */
     @GetMapping("/searchUniqueComment")
     @ResponseBody
-    public String searchUniqueComment(@RequestParam String articleid, @RequestParam Integer userid, Integer id) {
+    public String searchUniqueComment(@RequestParam String articleid, @RequestParam Integer userid, Integer id) throws JsonProcessingException {
         Comment commentList = commentMapper.getUniqueComment(articleid, userid, id);
-        return commentList.toString();
+        return objectMapper.writeValueAsString(commentList);
     }
 
     /**
