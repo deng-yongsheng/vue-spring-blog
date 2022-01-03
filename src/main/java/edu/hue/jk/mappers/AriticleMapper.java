@@ -27,7 +27,12 @@ public interface AriticleMapper {
      */
     @Select("select * from article where userid =#{userid}")
     List<Article> getArticlesByid(Integer userid);
-    //根据标题查询系统内的所有同名文章
+
+    /**
+     * 根据标题查询系统内的所有同名文章
+     * @param title
+     * @return
+     */
     @Select("select * from article where title = #{title}")
     List<Article> getArticlesByt(String title);
     //根据标题和用户id查询文章
