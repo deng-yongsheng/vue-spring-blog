@@ -2,7 +2,8 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="viewport"
+			content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
 		<link rel="stylesheet" type="text/css" href="css/element.css" />
 		<link rel="stylesheet" type="text/css" href="css/global.css" />
@@ -14,6 +15,7 @@
 		<script src="js/element.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/bootstrap3-wysihtml5.all.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/token.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/axios.min.js" type="text/javascript" charset="utf-8"></script>
 		<title>博客编辑上传</title>
 		<style type="text/css">
 			#blog-editor {
@@ -121,11 +123,10 @@
 			var app = new Vue({
 				el: '#blog-editor',
 				data: {
-					title: '',
-					description: '',
-					html: '',
+					title: '默认标题',
+					description: '默认描述-test',
+					html: '测试的文章正文',
 					editor: null,
-
 				},
 				methods: {
 					textChange() {
@@ -153,6 +154,27 @@
 							});
 							return;
 						}
+						let formData = new FormData();
+						// {
+						// 	title: this.title,
+						// 	description: this.description,
+						// 	content: this.html,
+						// }
+						formData.append('title',this.title);
+						formData.append('description',this.description);
+						formData.append('content',this.html);
+						console.log(formData);
+						axios({
+							method: 'POST',
+							url: '/article/upload',
+							headers: {
+								token: getToken(),
+								'Content-Type': 'application/x-www-form-urlencoded',
+							},
+							data: formData,
+						}).then(resp => {
+							console.log(resp);
+						});
 					}
 				},
 				created() {
