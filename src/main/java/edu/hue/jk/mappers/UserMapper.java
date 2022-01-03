@@ -28,8 +28,11 @@ public interface UserMapper {
      */
     @Select("select * from user where username = #{username}")
     User getUserByName(String username);
-
-    //删除用户
+    /**删除用户
+     * @param username 用户名
+     * @param password 密码
+     * @return
+     */
     @Delete("delete from user where username = #{username} and password = #{password}")
     int del(String username, String password);
 
