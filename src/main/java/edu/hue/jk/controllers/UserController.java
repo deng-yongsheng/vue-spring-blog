@@ -60,8 +60,11 @@ public class UserController {
         } else
             return "注册失败，当前用户名已被注册！";
     }
-
-    //判断用户是否已经注册
+    /**
+     * 判断用户是否存在
+     * @param username 用户名
+     * @return
+     */
     @GetMapping("/exists")
     @ResponseBody
     public Boolean exists(String username) {
