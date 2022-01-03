@@ -1,18 +1,19 @@
 package edu.hue.jk.controllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import edu.hue.jk.mappers.DocArticleMapper;
 import edu.hue.jk.mappers.UserMapper;
 import edu.hue.jk.models.DocArticle;
 import edu.hue.jk.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
-
+import java.util.List;
 
 
 @Controller
@@ -23,6 +24,8 @@ public class DocArticleController {
     private MongoOperations mongoOperations;
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private ObjectMapper objectMapper;
 
     /**
      * 根据uuid查询一篇文章
@@ -40,14 +43,14 @@ public class DocArticleController {
 
     /**
      * 往数据库上传一片文章
-     * @param model
+     *
      * @param docArticle
-     * @param username
+     * @param username   通过headers传入的token字段
      * @return
      */
     @PostMapping("/upload")
     @ResponseBody
-    public String upload(Model model, DocArticle docArticle, @RequestHeader(value = "token", required = true) String username) {
+    public String upload(DocArticle docArticle, @RequestHeader(value = "token", required = true) String username) {
         User user = userMapper.getUserByName(username);
         if (user != null) {
             if (docArticle.getTime() == null) {
@@ -56,18 +59,19 @@ public class DocArticleController {
             docArticle.setUsername(username);
             docArticle.setUserid(user.getId());
             mongoOperations.save(docArticle, "article");
-
             return "上传成功";
         } else {
             return "没有上传权限，请检查是否已经登录";
         }
     }
 
-    @RequestMapping("getAll")
+    @RequestMapping("/getAll")
     @ResponseBody
-    public String getAll(){
-        return "";
+    public String getAll() throws JsonProcessingException {
+        // 排除content字段
+        Query query = new Query();
+        query.fields().exclude("content");
+        List<DocArticle> articleList = mongoOperations.find(query,DocArticle.class, "article");
+        return objectMapper.writeValueAsString(articleList);
     }
-
-
 }
