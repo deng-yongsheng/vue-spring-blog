@@ -33,8 +33,14 @@ public interface CommentMapper {
     @Select("select * from comment where articleid=#{articleid} and userid=#{userid} and id=#{id}")
     Comment getUniqueComment(String articleid, Integer userid, Integer id);
 
-    /*
-    添加评论模块
+    //添加评论模块
+    /**
+     * 插入一条用户评论记录
+     * @param ip 用户ip地址
+     * @param userid 用户编号
+     * @param articleid 文章编号
+     * @param content 评论内容
+     * @return
      */
     //插入一条用户评论记录
     @Insert("insert into comment(userid, articleid, content,ip) values (#{userid}, #{articleid}, #{content},#{ip})")
