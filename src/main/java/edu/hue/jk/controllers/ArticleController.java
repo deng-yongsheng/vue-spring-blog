@@ -19,10 +19,11 @@ public class ArticleController {
     @Autowired
     private AriticleMapper ariticleMapper;
 
-    /*
-    查询模块
+    /**
+     * 查询系统内所有文章
+     * @param model
+     * @return
      */
-    //查询系统内所有文章
     @GetMapping("/selectAllArticles")
     @ResponseBody
     public String selectAllArticles(Model model) {
@@ -31,7 +32,12 @@ public class ArticleController {
         return articlesList.toString();
     }
 
-    //根据用户id号获取某个用户的所有文章
+    /**
+     * 根据用户id号获取某个用户的所有文章
+     * @param model
+     * @param userid
+     * @return
+     */
     @GetMapping("/selectArticlesByUserid")
     @ResponseBody
     public String selectArticlesByUserid(Model model, Integer userid) {
@@ -63,10 +69,12 @@ public class ArticleController {
         return uniquearticle.toString();
     }
 
-    /*
-    删除文章模块
+
+    /**
+     * 根据用户id号删除指定用户的所有文章
+     * @param userid 要删除的用户id
+     * @return 删除成功返回 > 0
      */
-    //根据用户id号删除指定用户的所有文章
     @GetMapping("/delArticlesByUserid")
     @ResponseBody
     public String delArticlesByUserid(Integer userid) {
@@ -78,7 +86,11 @@ public class ArticleController {
         }
     }
 
-    //根据文章id号删除文章
+    /**
+     * 根据文章id号删除文章
+     * @param id
+     * @return
+     */
     @GetMapping("/delArticlesById")
     @ResponseBody
     public String delArticlesById(String id) {
