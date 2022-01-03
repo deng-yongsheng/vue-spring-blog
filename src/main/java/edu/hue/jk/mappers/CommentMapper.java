@@ -45,10 +45,13 @@ public interface CommentMapper {
     @Insert("insert into comment(userid, articleid, content,ip) values (#{userid}, #{articleid}, #{content},#{ip})")
     int add(@Param("ip") String ip, @Param("userid") Integer userid, @Param("articleid") String articleid, @Param("content") String content);
 
-    /*
-    删除评论模块
+    //删除评论模块
+    /**
+     * 根据评论编号和文章编号删除一条评论
+     * @param articleid 文章编号
+     * @param id 评论编号
+     * @return
      */
-    //根据评论编号和文章编号删除一条评论
     @Delete("delete from comment where articleid = #{articleid} and id = #{id}")
     int del(String articleid, Integer id);
 
