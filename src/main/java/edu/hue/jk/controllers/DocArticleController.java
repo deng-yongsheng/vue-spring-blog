@@ -42,7 +42,7 @@ public class DocArticleController {
     }
 
     /**
-     * 往数据库上传一片文章
+     * 往数据库上传一篇文章
      *
      * @param docArticle
      * @param username   通过headers传入的token字段
