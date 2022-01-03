@@ -1,71 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="css/element.css" />
-    <link rel="stylesheet" type="text/css" href="css/global.css"/>
-    <script src="js/jquery-3.6.0.min.js" type="text/javascript" charset="utf-8"></script>
-    <script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
-    <script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
-    <script src="js/element.js" type="text/javascript" charset="utf-8"></script>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport"
+			content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/element.css" />
+		<link rel="stylesheet" type="text/css" href="css/global.css" />
+		<script src="js/jquery-3.6.0.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/element.js" type="text/javascript" charset="utf-8"></script>
 
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/element.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/global.css"/>
-    <script src="/js/jquery-3.6.0.min.js" type="text/javascript" charset="utf-8"></script>
-    <script src="/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
-    <script src="/js/vue.js" type="text/javascript" charset="utf-8"></script>
-    <script src="/js/element.js" type="text/javascript" charset="utf-8"></script>
-    <title>最新文章列表</title>
-    <style type="text/css">
-
-			#articleapp .title {
-				font-size: 24px;
-				color: black;
-				margin-bottom: 5px;
+		<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="/css/element.css" />
+		<link rel="stylesheet" type="text/css" href="/css/global.css" />
+		<script src="/js/jquery-3.6.0.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/js/element.js" type="text/javascript" charset="utf-8"></script>
+		<title>最新文章列表</title>
+		<style type="text/css">
+			.description {
+				display: block;
+				width: -webkit-fit-content;
+				margin: auto;
 			}
+		</style>
+	</head>
+	<body th:object="${article}">
+		<div class="container">
+			<h1 class="page-header text-center" th:text="*{title}">文章标题</h1>
+			<div class="description">
+				<span th:text="*{description}">描述</span>|
+				<span th:text="*{description}">作者</span>|
+				<span th:text="*{#dates.format(time,'yyyy-MM-dd HH:mm:ss')}">发布时间</span>
+			</div>
 
-			#articleapp .article {
-				margin-bottom: 10px;
-			}
+			<div style="height: 30px;"></div>
+			<div class="container" th:utext="*{content}">
+				文章正文
+			</div>
+		</div>
 
-			#articleapp .detail{
-			    color: red;
-			}
-
-			#articleapp .author {
-				/* font-weight: bold; */
-				font-size: 18px;
-				text-align: center;
-				line-height: 50px;
-			}
-
-			#articleapp .time {
-				font-size: 18px;
-				text-align: center;
-				line-height: 50px;
-			}
-
-
-    </style>
-</head>
-<body th:object="${article}">
-<div class="container">
-    <h1 class="page-header text-center" th:text="*{title}">文章标题</h1>
-    <div style="height: 30px;"></div>
-    <div class="container" id="articleapp">
-        <el-row :gutter="20" type="flex" class="article" v-for="article in articleList" th:text="*{content}">
-
-        </el-row>
-    </div>
-</div>
-
-<script type="text/javascript">
-
-</script>
-
-</body>
+	</body>
 </html>
