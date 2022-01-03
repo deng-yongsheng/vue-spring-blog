@@ -7,8 +7,11 @@ import java.util.List;
 
 @Mapper
 public interface CommentMapper {
-    /*
-    查询模块
+    //查询模块
+    /**
+     * 根据文章编号查询评论相关信息
+     * @param articleid 文章编号
+     * @return
      */
     //根据文章编号查询评论相关信息
     @Select("select * from comment where articleid=#{articleid}")
