@@ -53,9 +53,11 @@ public interface AriticleMapper {
     @Select("select * from article where id = #{id}")
     Article getUniqueArticle(String id);
 
-
-    /*
-    上传文章模块
+    //删除文章模块
+    /**
+     * 根据用户id号删除指定用户的所有文章
+     * @param userid
+     * @return
      */
 
 
