@@ -11,8 +11,11 @@ import java.util.List;
 @Mapper
 public interface AriticleMapper {
 
-    /*
-    查询模块
+    //查询模块
+
+    /**
+     * 查询系统内所有文章
+     * @return
      */
     //查询系统内所有文章
     @Select("select * from article")
