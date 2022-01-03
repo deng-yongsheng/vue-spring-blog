@@ -2,12 +2,11 @@ package edu.hue.jk.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.sql.Date;
+import java.util.Date;
 
 @Data
 @Document
@@ -16,8 +15,8 @@ public class DocArticle {
     @Id
     String id;
     String title;
-
-    @JsonFormat(pattern="yyyy-MM-dd HH-mm-ss")
+    String description;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     Date time;
     Integer userid;
     String username;
