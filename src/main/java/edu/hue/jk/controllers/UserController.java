@@ -41,8 +41,12 @@ public class UserController {
             return "用户名或者密码错误！";
         }
     }
-
-    //注册模块
+    /**
+     * 用户注册
+     * @param username 用户名
+     * @param password 密码
+     * @return
+     */
     @GetMapping("/register")
     @ResponseBody
     public String register( String username,  String password) {
