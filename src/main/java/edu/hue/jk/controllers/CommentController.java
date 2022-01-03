@@ -53,8 +53,9 @@ public class CommentController {
      */
     @PostMapping("/addcomment")
     @ResponseBody
-    public String addcomment(@RequestParam String articleid, @RequestParam String content, @RequestParam Integer userid) {
-        int isadd = commentMapper.add(userid, articleid, content);
+    public String addcomment(HttpServletRequest request, @RequestParam String articleid, @RequestParam String content, @RequestParam Integer userid) {
+        String ip = IpUtils.getRealIp(request);
+        int isadd = commentMapper.add(ip, userid, articleid, content);
         if (isadd > 0) {
             return "评论成功!";
         } else {
