@@ -13,7 +13,6 @@ public interface CommentMapper {
      * @param articleid 文章编号
      * @return
      */
-    //根据文章编号查询评论相关信息
     @Select("select * from comment where articleid=#{articleid}")
     List<Comment> getCommnentListByArticleId(@Param("articleid") String articleid);
 
