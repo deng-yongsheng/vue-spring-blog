@@ -16,6 +16,7 @@
 		<script src="js/bootstrap3-wysihtml5.all.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/token.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/axios.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/qs.js" type="text/javascript" charset="utf-8"></script>
 		<title>博客编辑上传</title>
 		<style type="text/css">
 			#blog-editor {
@@ -154,16 +155,6 @@
 							});
 							return;
 						}
-						let formData = new FormData();
-						// {
-						// 	title: this.title,
-						// 	description: this.description,
-						// 	content: this.html,
-						// }
-						formData.append('title',this.title);
-						formData.append('description',this.description);
-						formData.append('content',this.html);
-						console.log(formData);
 						axios({
 							method: 'POST',
 							url: '/article/upload',
@@ -171,9 +162,22 @@
 								token: getToken(),
 								'Content-Type': 'application/x-www-form-urlencoded',
 							},
-							data: formData,
+							data: Qs.stringify({
+								title: this.title,
+								description: this.description,
+								content: this.html,
+							}),
 						}).then(resp => {
 							console.log(resp);
+							if(resp.data.indexOf('成功')>0){
+								this.$alert('上传成功，是否跳转到主页？', '提示', {
+									confirmButtonText: '确定',
+									cancelButtonText: '取消',
+									callback() {
+										location.href = '/';
+									}
+								});
+							}
 						});
 					}
 				},
