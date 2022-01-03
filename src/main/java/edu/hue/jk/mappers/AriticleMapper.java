@@ -44,7 +44,12 @@ public interface AriticleMapper {
      */
     @Select("select * from article where title = #{title} and userid = #{userid}")
     List<Article> getArticleByidandt(String title, Integer userid);
-    //根据文章id查询对应文章
+
+    /**
+     * 根据文章id查询对应文章
+     * @param id
+     * @return
+     */
     @Select("select * from article where id = #{id}")
     Article getUniqueArticle(String id);
 
