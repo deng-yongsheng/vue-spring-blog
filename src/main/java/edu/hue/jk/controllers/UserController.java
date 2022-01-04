@@ -76,7 +76,7 @@ public class UserController {
      * 判断用户是否存在
      *
      * @param username 用户名
-     * @return
+     * @return 布尔值，表示用户是否存在
      */
     @GetMapping("/exists")
     @ResponseBody
