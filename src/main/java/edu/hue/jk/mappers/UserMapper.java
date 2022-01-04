@@ -42,21 +42,5 @@ public interface UserMapper {
      * @return
      */
     @Delete("delete from user where username = #{username} and password = #{password}")
-    int del(String username, String password);
-
-//    /*
-//    修改用户信息
-//     */
-//    //仅修改用户名
-//    @Update("update user set username = #{username}")
-//    int updateusername();
-//    //仅修改用户密码
-//    @Update("update user set password = #{password}")
-//    int updatepassword();
-//    //同时修改用户名和用户密码
-//    @Update("update user set username = #{username} and password = #{password}")
-//    int updateNameandPwd();
-//    //修改用户权限
-//    @Update("update user set usertype=#{usertype} where username=#{username}")
-//    int updateconfigure(String username, String usertype);
+    int del(@Param("username") String username, @Param("password") String password);
 }
