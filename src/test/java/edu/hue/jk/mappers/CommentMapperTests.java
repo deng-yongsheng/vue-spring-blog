@@ -19,6 +19,10 @@ public class CommentMapperTests {
     @Autowired
     private ObjectMapper objectMapper;
 
+    /**
+     * 根据文章编号查询评论相关信息
+     * 功能测试
+     */
     @Test
     public void getCommentList() throws JsonProcessingException {
         System.out.println(objectMapper.writeValueAsString(commentMapper.getCommnentListByArticleId("61d29e957921802b08fe28b6")));
