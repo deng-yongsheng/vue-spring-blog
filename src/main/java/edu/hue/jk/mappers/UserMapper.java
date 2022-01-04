@@ -48,7 +48,7 @@ public interface UserMapper {
     int del(@Param("username") String username, @Param("password") String password);
 
     /**
-     * 根据用用户id查找用户信息
+     * 根据用户id查找用户信息-----》在CommentMapper接口类中实现根据文章编号查询相关评论时，会用到该方法用于一对一关联查询
      *
      * @param userid 用户id
      * @return
