@@ -15,4 +15,6 @@ public class Comment {
     Date time;
     String content;
     String ip;
+
+    User user;
 }

@@ -16,6 +16,10 @@ public interface CommentMapper {
      * @return
      */
     @Select("select * from comment where articleid=#{articleid}")
+    @Results({
+            @Result(column = "userid",property = "user",one = @One(select = "edu.hue.jk.mappers.UserMapper.getUserById")),
+            @Result(column = "userid",property = "userid")
+    })
     List<Comment> getCommnentListByArticleId(@Param("articleid") String articleid);
 
     /**

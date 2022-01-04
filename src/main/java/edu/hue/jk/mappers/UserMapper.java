@@ -44,6 +44,15 @@ public interface UserMapper {
     @Delete("delete from user where username = #{username} and password = #{password}")
     int del(String username, String password);
 
+    /**
+     * 根据用用户id查找用户信息
+     *
+     * @param userid 用户id
+     * @return
+     */
+    @Select("select * from user where id = #{userid}")
+    User getUserById(Integer userid);
+
 //    /*
 //    修改用户信息
 //     */

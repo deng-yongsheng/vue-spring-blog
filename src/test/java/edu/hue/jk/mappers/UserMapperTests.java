@@ -17,7 +17,12 @@ public class UserMapperTests {
      * 登录测试
      */
     @Test
-    public void login_test(){
-        System.out.println(userMapper.login("sheng","123456"));
+    public void login_test() {
+        System.out.println(userMapper.login("sheng", "123456"));
+    }
+
+    @Test
+    public void getUserById() {
+        System.out.println(userMapper.getUserById(1));
     }
 }

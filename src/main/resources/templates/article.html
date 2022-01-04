@@ -76,7 +76,8 @@
 				</el-row>
 				<div class="comment-item" v-for="com in commentList">
 					<el-row>
-						<el-col v-text="'来自'+com.ip+'用户的评论:'" v-if="com.ip!='我'" style="font-size: 16px;">ip的评论</el-col>
+						<el-col v-text="'来自'+com.ip+'用户的评论:'" v-if="com.ip!='我' && com.user==null" style="font-size: 16px;">ip的评论</el-col>
+						<el-col v-text="com.user.username+'的评论:'" v-if="com.user!=null" style="font-size: 16px;">用户名的评论</el-col>
 						<el-col v-text="'我的评论：'" v-if="com.ip=='我'" style="font-size: 16px;color: red;"></el-col>
 					</el-row>
 					<el-row>
