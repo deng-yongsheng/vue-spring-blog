@@ -27,6 +27,7 @@ public class UserController {
 
     /**
      * 用户登录
+     *
      * @param username 用户名
      * @param password 密码
      * @return
@@ -56,14 +57,19 @@ public class UserController {
     @ResponseBody
     public String register(String username, String password) {
         if (userMapper.getUserByName(username) == null) {
-            int isRegister = userMapper.register(username, password);
-            if (isRegister > 0) {
-                return "注册成功!";
+            if (username.length() < 2) {
+                return "用户名太短";
             } else {
-                return "注册失败!";
+                int isRegister = userMapper.register(username, password);
+                if (isRegister > 0) {
+                    return "注册成功!";
+                } else {
+                    return "注册失败!";
+                }
             }
-        } else
+        } else {
             return "注册失败，当前用户名已被注册！";
+        }
     }
 
     /**
