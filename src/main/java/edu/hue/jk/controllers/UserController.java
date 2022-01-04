@@ -22,14 +22,15 @@ public class UserController {
     @Autowired
     private ObjectMapper objectMapper;
 
-    @GetMapping("/login")
-    @ResponseBody
+
     /**
      * 用户登录
      * @param username 用户名
      * @param password 密码
      * @return
      */
+    @GetMapping("/login")
+    @ResponseBody
     public String login(@RequestParam String username, @RequestParam String password) throws JsonProcessingException {
         if (username == null || password == null || username.length() == 0 || password.length() == 0) {
             return "用户和密码不能为空！";
