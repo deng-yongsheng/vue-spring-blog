@@ -91,7 +91,6 @@
 									}
 								}).then(resp => {
 									this.logining = false;
-									// console.log(resp);
 									if(resp.data.username!=undefined){
 										this.$alert('登录成功');
 										setToken(resp.data.id,resp.data.username);
