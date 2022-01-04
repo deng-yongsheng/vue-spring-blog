@@ -3,6 +3,9 @@ package edu.hue.jk.mappers;
 import edu.hue.jk.models.User;
 import org.apache.ibatis.annotations.*;
 
+/**
+ * 接口实现类
+ */
 @Mapper
 public interface UserMapper {
     /**
