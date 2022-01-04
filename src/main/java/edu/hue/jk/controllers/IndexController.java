@@ -26,4 +26,8 @@ public class IndexController {
         return "forward:/upload.html";
     }
 
+    @RequestMapping("/user")
+    public String user(){
+        return "user.html";
+    }
 }

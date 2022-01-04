@@ -44,6 +44,26 @@ public class DocArticleController {
     }
 
     /**
+     * 获取某个用户的全部文章
+     *
+     * @param userid 用户id
+     * @return thymeleaf模板名称
+     */
+    @GetMapping("/user/{userid}")
+    @ResponseBody
+    public String getArticleOfuser(@PathVariable(value = "userid", required = true) Integer userid) throws JsonProcessingException {
+        User author = userMapper.getUserById(userid);
+        Query query = new Query();
+        query.addCriteria(Criteria.where("userid").is(userid));
+        query.fields().exclude("content");
+        List<DocArticle> articleList = mongoOperations.find(query, DocArticle.class, "article");
+        for (DocArticle article : articleList) {
+            article.setAuthor(author);
+        }
+        return objectMapper.writeValueAsString(articleList);
+    }
+
+    /**
      * 往数据库上传一篇文章
      *
      * @param docArticle
