@@ -71,7 +71,7 @@ public class DocArticleController {
         // 排除content字段
         Query query = new Query();
         query.fields().exclude("content");
-        List<DocArticle> articleList = mongoOperations.find(query,DocArticle.class, "article");
+        List<DocArticle> articleList = mongoOperations.find(query, DocArticle.class, "article");
         return objectMapper.writeValueAsString(articleList);
     }
 }

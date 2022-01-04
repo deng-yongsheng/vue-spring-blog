@@ -15,6 +15,7 @@ public interface AriticleMapper {
 
     /**
      * 查询系统内所有文章
+     *
      * @return
      */
     @Select("select * from article")
@@ -22,6 +23,7 @@ public interface AriticleMapper {
 
     /**
      * 根据用户id号获取某个用户的所有文章
+     *
      * @param userid
      * @return
      */
@@ -30,6 +32,7 @@ public interface AriticleMapper {
 
     /**
      * 根据标题查询系统内的所有同名文章
+     *
      * @param title
      * @return
      */
@@ -38,6 +41,7 @@ public interface AriticleMapper {
 
     /**
      * 根据标题和用户id查询文章
+     *
      * @param title
      * @param userid
      * @return
@@ -47,6 +51,7 @@ public interface AriticleMapper {
 
     /**
      * 根据文章id查询对应文章
+     *
      * @param id
      * @return
      */
@@ -54,8 +59,10 @@ public interface AriticleMapper {
     Article getUniqueArticle(String id);
 
     //删除文章模块
+
     /**
      * 根据用户id号删除指定用户的所有文章
+     *
      * @param userid
      * @return
      */
@@ -64,6 +71,7 @@ public interface AriticleMapper {
 
     /**
      * 根据文章id号删除文章
+     *
      * @param id
      * @return
      */

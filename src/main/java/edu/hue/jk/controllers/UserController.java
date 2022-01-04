@@ -41,15 +41,17 @@ public class UserController {
             return "用户名或者密码错误！";
         }
     }
+
     /**
      * 用户注册
+     *
      * @param username 用户名
      * @param password 密码
      * @return
      */
     @GetMapping("/register")
     @ResponseBody
-    public String register( String username,  String password) {
+    public String register(String username, String password) {
         if (userMapper.getUserByName(username) == null) {
             int isRegister = userMapper.register(username, password);
             if (isRegister > 0) {
@@ -60,8 +62,10 @@ public class UserController {
         } else
             return "注册失败，当前用户名已被注册！";
     }
+
     /**
      * 判断用户是否存在
+     *
      * @param username 用户名
      * @return
      */
@@ -74,8 +78,10 @@ public class UserController {
             return false;
         }
     }
+
     /**
      * 根据用户名查找用户信息
+     *
      * @param username 用户名
      * @return
      */
@@ -85,8 +91,10 @@ public class UserController {
         User userinfo = userMapper.getUserByName(username);
         return objectMapper.writeValueAsString(userinfo);
     }
+
     /**
      * 删除用户
+     *
      * @param username 用户名
      * @param password 密码
      * @return

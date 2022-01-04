@@ -11,7 +11,7 @@ public class Comment {
     Integer userid;
     String articleid;
 
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     Date time;
     String content;
     String ip;

@@ -22,7 +22,7 @@ public class IndexController {
     }
 
     @RequestMapping("/upload")
-    public String upload(){
+    public String upload() {
         return "forward:/upload.html";
     }
 
