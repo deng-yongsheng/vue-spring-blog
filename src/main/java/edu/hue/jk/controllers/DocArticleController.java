@@ -66,6 +66,12 @@ public class DocArticleController {
         }
     }
 
+    /**
+     * 查询当前数据库已经有的文章，不包含文章正文
+     *
+     * @return 不包含文章正文
+     * @throws JsonProcessingException
+     */
     @RequestMapping("/getAll")
     @ResponseBody
     public String getAll() throws JsonProcessingException {
@@ -80,7 +86,7 @@ public class DocArticleController {
      * 删除一篇文章
      *
      * @param articleid 要删除的文章编号
-     * @return
+     * @return 返回删除了的文章
      * @throws JsonProcessingException
      */
     @RequestMapping("/del/{articleid}")
