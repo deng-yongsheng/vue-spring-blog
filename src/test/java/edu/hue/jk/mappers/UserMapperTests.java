@@ -13,16 +13,33 @@ public class UserMapperTests {
     @Autowired
     private UserMapper userMapper;
 
-    /**
-     * 登录测试
-     */
-    @Test
-    public void login_test() {
-        System.out.println(userMapper.login("sheng", "123456"));
-    }
 
     @Test
-    public void getUserById() {
-        System.out.println(userMapper.getUserById(1));
+    public void test() {
+        /**
+         * 用户登录
+         * 功能测试
+         */
+        System.out.println(userMapper.login("徐涛", "123456"));
+        /**
+         * 用户注册
+         * 功能测试
+         */
+        System.out.println(userMapper.register("王五", "123456"));
+        /**
+         * 根据用户名查找用户信息
+         * 功能测试
+         */
+        System.out.println(userMapper.getUserByName("徐涛"));
+        /**
+         * 删除用户
+         * 功能测试
+         */
+        System.out.println(userMapper.del("王五", "123456"));
+        /**
+         * 根据用户id查找用户信息
+         * 功能测试
+         */
+        System.out.println(userMapper.getUserById(2));
     }
 }

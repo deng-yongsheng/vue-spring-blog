@@ -10,7 +10,7 @@ public interface CommentMapper {
     //查询模块
 
     /**
-     * 根据文章编号查询评论相关信息
+     * 根据文章编号查询评论相关信息（已在前端实现）
      *
      * @param articleid 文章编号
      * @return
@@ -46,7 +46,7 @@ public interface CommentMapper {
     //添加评论模块
 
     /**
-     * 插入一条用户评论记录
+     * 插入一条用户评论记录（已在前端实现）
      *
      * @param ip        用户ip地址
      * @param userid    用户编号
