@@ -12,8 +12,8 @@
 		<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/element.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/token.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/axios.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/token.js" type="text/javascript" charset="utf-8"></script>
 		<title>最新文章列表</title>
 		<style type="text/css">
 			#articleapp .title {
@@ -110,7 +110,7 @@
 				methods: {
 					clickArticle(articleid) {
 						// alert(title);
-						location.href = '/article/'+articleid;
+						location.href = '/article/' + articleid;
 					},
 					clickAuthor(username) {
 						alert(username);
@@ -120,6 +120,7 @@
 					axios.get("/article/getAll").then(resp => {
 						console.log(resp.data);
 						resp.data.forEach(item => {
+							// 仅显示日期部分
 							item.time = item.time.split(' ')[0];
 						})
 						console.log(resp.data);
@@ -144,7 +145,6 @@
 						clearToken();
 						this.iflogin = false;
 						this.username = null;
-						// this.$forceUpdate();
 					},
 				}
 			})
