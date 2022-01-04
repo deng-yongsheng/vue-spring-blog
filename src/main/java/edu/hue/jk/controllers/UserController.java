@@ -26,8 +26,8 @@ public class UserController {
 
 
     /**
-     * 用户登录
-     *
+     * 用户登录（已在前端实现）
+     * 
      * @param username 用户名
      * @param password 密码
      * @return
@@ -47,7 +47,7 @@ public class UserController {
     }
 
     /**
-     * 用户注册
+     * 用户注册（已在前端实现）
      *
      * @param username 用户名
      * @param password 密码
@@ -73,10 +73,10 @@ public class UserController {
     }
 
     /**
-     * 判断用户是否存在
+     * 判断用户是否存在（已在前端实现）
      *
      * @param username 用户名
-     * @return 布尔值，表示用户是否存在
+     *  @return 布尔值，表示用户是否存在
      */
     @GetMapping("/exists")
     @ResponseBody
