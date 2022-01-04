@@ -79,9 +79,9 @@
 	<body>
 		<div class="container">
 			<div id="login" class="container">
-				<a v-if="!iflogin" href="login.html">用户登录</a>
+				<a v-if="!iflogin" href="/login">用户登录</a>
 				<a v-if="iflogin" v-text="username">用户名</a>
-				<a v-if="iflogin" href="upload.html">上传文章</a>
+				<a v-if="iflogin" href="/upload">上传文章</a>
 				<a v-if="iflogin" @click="logout()">注销</a>
 			</div>
 			<h1 class="page-header text-center">最新文章</h1>
