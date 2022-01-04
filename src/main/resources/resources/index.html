@@ -85,8 +85,11 @@
 						</div>
 						<div> {{ article.description }} </div>
 					</el-col>
-					<el-col :xs="6" :sm="4" class="author" @click.native.stop="clickAuthor(article.username)">
+					<el-col :xs="6" :sm="4" class="author" v-if="article.author==null" @click.native.stop="clickAuthor(article.userid)">
 						{{ article.username }}
+					</el-col>
+					<el-col :xs="6" :sm="4" class="author" v-if="article.author!=null" @click.native.stop="clickAuthor(article.userid)">
+						{{ article.author.username }}
 					</el-col>
 					<el-col :xs="0" :sm="4" class="time hidden-xs-only">
 						{{ article.time }}

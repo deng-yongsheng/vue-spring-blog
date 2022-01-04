@@ -38,6 +38,7 @@ public class DocArticleController {
     @GetMapping("/{articleid}")
     public String getArticle(Model model, @PathVariable(value = "articleid", required = true) String articleid) {
         DocArticle article = mongoOperations.findById(articleid, DocArticle.class, "article");
+        article.setAuthor(userMapper.getUserById(article.getUserid()));
         model.addAttribute("article", article);
         return "article.html";
     }
@@ -79,6 +80,10 @@ public class DocArticleController {
         Query query = new Query();
         query.fields().exclude("content");
         List<DocArticle> articleList = mongoOperations.find(query, DocArticle.class, "article");
+        // 加载作者信息
+        for (DocArticle article : articleList) {
+            article.setAuthor(userMapper.getUserById(article.getUserid()));
+        }
         return objectMapper.writeValueAsString(articleList);
     }
 

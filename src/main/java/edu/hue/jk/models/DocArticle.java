@@ -21,4 +21,6 @@ public class DocArticle {
     Integer userid;
     String username;
     String content;
+
+    User author;
 }
