@@ -7,6 +7,7 @@ import edu.hue.jk.models.DocArticle;
 import edu.hue.jk.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -73,5 +74,21 @@ public class DocArticleController {
         query.fields().exclude("content");
         List<DocArticle> articleList = mongoOperations.find(query, DocArticle.class, "article");
         return objectMapper.writeValueAsString(articleList);
+    }
+
+    /**
+     * 删除一篇文章
+     *
+     * @param articleid 要删除的文章编号
+     * @return
+     * @throws JsonProcessingException
+     */
+    @RequestMapping("/del/{articleid}")
+    @ResponseBody
+    public String del(@PathVariable(value = "articleid") String articleid) throws JsonProcessingException {
+        System.out.println("articleid: " + articleid);
+        Query query = new Query(Criteria.where("id").is(articleid));
+        DocArticle docArticle = mongoOperations.findAndRemove(query, DocArticle.class, "article");
+        return objectMapper.writeValueAsString(docArticle);
     }
 }
