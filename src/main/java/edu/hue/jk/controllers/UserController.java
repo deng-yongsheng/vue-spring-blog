@@ -4,19 +4,21 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.hue.jk.mappers.UserMapper;
 import edu.hue.jk.models.User;
-import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
+/**
+ * 标识当前类是一个SpringMVC Controller对象
+ * 用于映射url到控制器类的一个特定处理程序方法。可用于方法或者类上面。也就是可以通过url找到对应的方法
+ */
 @Controller
 @RequestMapping("/api/user")
 public class UserController {
+    //依赖自动注入
     @Autowired
     private UserMapper userMapper;
     @Autowired
