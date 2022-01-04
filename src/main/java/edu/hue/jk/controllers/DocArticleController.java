@@ -49,7 +49,7 @@ public class DocArticleController {
      * @param userid 用户id
      * @return thymeleaf模板名称
      */
-    @GetMapping("/user/{userid}")
+    @GetMapping("/ofuser/{userid}")
     @ResponseBody
     public String getArticleOfuser(@PathVariable(value = "userid", required = true) Integer userid) throws JsonProcessingException {
         User author = userMapper.getUserById(userid);
