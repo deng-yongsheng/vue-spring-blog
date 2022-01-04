@@ -6,6 +6,7 @@ import edu.hue.jk.mappers.UserMapper;
 import edu.hue.jk.models.DocArticle;
 import edu.hue.jk.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -56,6 +57,8 @@ public class DocArticleController {
         Query query = new Query();
         query.addCriteria(Criteria.where("userid").is(userid));
         query.fields().exclude("content");
+        // 按时间排降序
+        query.with(new Sort(Sort.Direction.DESC, "time"));
         List<DocArticle> articleList = mongoOperations.find(query, DocArticle.class, "article");
         for (DocArticle article : articleList) {
             article.setAuthor(author);
@@ -99,6 +102,8 @@ public class DocArticleController {
         // 排除content字段
         Query query = new Query();
         query.fields().exclude("content");
+        // 按时间排降序
+        query.with(new Sort(Sort.Direction.DESC, "time"));
         List<DocArticle> articleList = mongoOperations.find(query, DocArticle.class, "article");
         // 加载作者信息
         for (DocArticle article : articleList) {
