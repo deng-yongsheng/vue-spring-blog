@@ -7,7 +7,7 @@
     <groupId>edu.hue.jk</groupId>
     <artifactId>CannonBlog</artifactId>
     <packaging>war</packaging>
-    <version>0.1-alpha</version>
+    <version>1.0-beta</version>
 
 
     <properties>
