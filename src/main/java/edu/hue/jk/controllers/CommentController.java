@@ -23,7 +23,7 @@ public class CommentController {
     private ObjectMapper objectMapper;
 
     /**
-     * 根据文章编号查询相关的评论信息（测试成功）
+     * 根据文章编号查询相关的评论信息（已在前端实现）
      *
      * @param articleid
      * @return
@@ -65,7 +65,7 @@ public class CommentController {
     }
 
     /**
-     * 添加一条评论
+     * 添加一条评论（已在前端实现）
      *
      * @param request   用户请求,用来提取IP地址
      * @param articleid 用户评论的文章id

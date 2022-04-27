@@ -14,6 +14,16 @@
 		<script src="js/element.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/axios.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/token.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="/css/element.css" />
+		<link rel="stylesheet" type="text/css" href="/css/global.css" />
+		<link rel="stylesheet" type="text/css" href="/css/element-display.css" />
+		<script src="/js/jquery-3.6.0.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/js/element.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/js/axios.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/js/token.js" type="text/javascript" charset="utf-8"></script>
 		<title>最新文章列表</title>
 		<style type="text/css">
 			#articleapp .title {
@@ -69,9 +79,9 @@
 	<body>
 		<div class="container">
 			<div id="login" class="container">
-				<a v-if="!iflogin" href="login.html">用户登录</a>
+				<a v-if="!iflogin" href="/login">用户登录</a>
 				<a v-if="iflogin" v-text="username">用户名</a>
-				<a v-if="iflogin" href="upload.html">上传文章</a>
+				<a v-if="iflogin" href="/upload">上传文章</a>
 				<a v-if="iflogin" @click="logout()">注销</a>
 			</div>
 			<h1 class="page-header text-center">最新文章</h1>
@@ -88,7 +98,7 @@
 					<el-col :xs="6" :sm="4" class="author" v-if="article.author==null" @click.native.stop="clickAuthor(article.userid)">
 						{{ article.username }}
 					</el-col>
-					<el-col :xs="6" :sm="4" class="author" v-if="article.author!=null" @click.native.stop="clickAuthor(article.userid)">
+					<el-col :xs="6" :sm="4" class="author" v-if="article.author!=null">
 						{{ article.author.username }}
 					</el-col>
 					<el-col :xs="0" :sm="4" class="time hidden-xs-only">
@@ -102,6 +112,7 @@
 			var app = new Vue({
 				el: '#articleapp',
 				data: {
+					userid:'[[${userid}]]',
 					articleList: [{
 						id: '123',
 						title: "编码12年，如何实现财务自由！",
@@ -115,12 +126,12 @@
 						// alert(title);
 						location.href = '/article/' + articleid;
 					},
-					clickAuthor(userid) {
-						location.href = '/user/'+userid;
+					clickAuthor(username) {
+						alert(username);
 					}
 				},
 				mounted() {
-					axios.get("/article/getAll").then(resp => {
+					axios.get("/article/ofuser/"+this.userid).then(resp => {
 						console.log(resp.data);
 						resp.data.forEach(item => {
 							// 仅显示日期部分

@@ -4,27 +4,36 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.hue.jk.mappers.UserMapper;
 import edu.hue.jk.models.User;
-import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
+/**
+ * 标识当前类是一个SpringMVC Controller对象
+ * 用于映射url到控制器类的一个特定处理程序方法。可用于方法或者类上面。也就是可以通过url找到对应的方法
+ */
 @Controller
 @RequestMapping("/api/user")
 public class UserController {
+    //依赖自动注入
     @Autowired
     private UserMapper userMapper;
     @Autowired
     private ObjectMapper objectMapper;
 
+
+    /**
+     * 用户登录（已在前端实现）
+     * 
+     * @param username 用户名
+     * @param password 密码
+     * @return
+     */
     @GetMapping("/login")
     @ResponseBody
-    //登录模块
     public String login(@RequestParam String username, @RequestParam String password) throws JsonProcessingException {
         if (username == null || password == null || username.length() == 0 || password.length() == 0) {
             return "用户和密码不能为空！";
@@ -37,22 +46,38 @@ public class UserController {
         }
     }
 
-    //注册模块
+    /**
+     * 用户注册（已在前端实现）
+     *
+     * @param username 用户名
+     * @param password 密码
+     * @return
+     */
     @GetMapping("/register")
     @ResponseBody
-    public String register( String username,  String password) {
+    public String register(String username, String password) {
         if (userMapper.getUserByName(username) == null) {
-            int isRegister = userMapper.register(username, password);
-            if (isRegister > 0) {
-                return "注册成功!";
+            if (username.length() < 2) {
+                return "用户名太短";
             } else {
-                return "注册失败!";
+                int isRegister = userMapper.register(username, password);
+                if (isRegister > 0) {
+                    return "注册成功!";
+                } else {
+                    return "注册失败!";
+                }
             }
-        } else
+        } else {
             return "注册失败，当前用户名已被注册！";
+        }
     }
 
-    //判断用户是否已经注册
+    /**
+     * 判断用户是否存在（已在前端实现）
+     *
+     * @param username 用户名
+     *  @return 布尔值，表示用户是否存在
+     */
     @GetMapping("/exists")
     @ResponseBody
     public Boolean exists(String username) {
@@ -63,7 +88,12 @@ public class UserController {
         }
     }
 
-    //根据用户名查找用户信息
+    /**
+     * 根据用户名查找用户信息
+     *
+     * @param username 用户名
+     * @return
+     */
     @GetMapping("/selectUserInfoByUserid")
     @ResponseBody
     public String selectUserInfoByUserid(String username) throws JsonProcessingException {
@@ -71,7 +101,13 @@ public class UserController {
         return objectMapper.writeValueAsString(userinfo);
     }
 
-    //删除用户
+    /**
+     * 删除用户
+     *
+     * @param username 用户名
+     * @param password 密码
+     * @return
+     */
     @GetMapping("/delUserInfo")
     @ResponseBody
     public String delUserInfo(String username, String password) {
@@ -82,5 +118,4 @@ public class UserController {
             return "删除用户失败！";
         }
     }
-
 }

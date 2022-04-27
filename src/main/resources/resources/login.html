@@ -63,7 +63,7 @@
 				data: {
 					logining: false,
 					ruleForm2: {
-						username: 'sheng',
+						username: '邓永盛',
 						password: '123456',
 					},
 					rules2: {
@@ -91,10 +91,9 @@
 									}
 								}).then(resp => {
 									this.logining = false;
-									// console.log(resp);
 									if(resp.data.username!=undefined){
 										this.$alert('登录成功');
-										setToken(resp.data.userid,resp.data.username);
+										setToken(resp.data.id,resp.data.username);
 										// 跳转到一个页面
 										location.href = document.referrer;
 									}else{

@@ -65,7 +65,7 @@
 				methods: {
 					checkNameIsUsed() {
 						if (this.username != undefined && this.username.length > 0) {
-							if (this.username.length < 5) {
+							if (this.username.length < 2) {
 								this.$alert('用户名太短', '提示', {
 									confirmButtonText: '确定',
 									callback() {

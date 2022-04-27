@@ -16,9 +16,11 @@ public class DocArticle {
     String id;
     String title;
     String description;
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     Date time;
     Integer userid;
     String username;
     String content;
+
+    User author;
 }

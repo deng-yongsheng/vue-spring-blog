@@ -1,6 +1,8 @@
 package edu.hue.jk.controllers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -22,8 +24,13 @@ public class IndexController {
     }
 
     @RequestMapping("/upload")
-    public String upload(){
+    public String upload() {
         return "forward:/upload.html";
     }
 
+    @RequestMapping("/user/{userid}")
+    public String user(Model model, @PathVariable(value = "userid") Integer userid) {
+        model.addAttribute("userid", userid);
+        return "user.html";
+    }
 }

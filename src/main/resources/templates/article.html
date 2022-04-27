@@ -54,7 +54,8 @@
 			<h1 class="page-header text-center" th:text="*{title}">文章标题</h1>
 			<div class="description">
 				<!-- 	<p th:text="*{description}">描述</p> -->
-				<span th:text="*{username}">作者</span>|
+				<span th:if="*{author==null}" th:text="*{username}">作者</span>
+				<span th:if="*{author!=null}" th:text="*{author.username}">作者</span>|
 				<span th:text="*{#dates.format(time,'yyyy-MM-dd HH:mm:ss')}">发布时间</span>
 			</div>
 
@@ -76,7 +77,8 @@
 				</el-row>
 				<div class="comment-item" v-for="com in commentList">
 					<el-row>
-						<el-col v-text="'来自'+com.ip+'用户的评论:'" v-if="com.ip!='我'" style="font-size: 16px;">ip的评论</el-col>
+						<el-col v-text="'来自'+com.ip+'用户的评论:'" v-if="com.ip!='我' && com.user==null" style="font-size: 16px;">ip的评论</el-col>
+						<el-col v-text="com.user.username+'的评论:'" v-if="com.user!=null" style="font-size: 16px;">用户名的评论</el-col>
 						<el-col v-text="'我的评论：'" v-if="com.ip=='我'" style="font-size: 16px;color: red;"></el-col>
 					</el-row>
 					<el-row>
