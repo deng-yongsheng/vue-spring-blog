@@ -16,7 +16,7 @@ spring:
     static-locations: file:D:\Source_Code\IDEA\java-web-blog\src\main\resources\resources
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://dengyongsheng.cn:3306/blog?serverTimezone=GMT%2B8&characterEncoding=utf-8&useSSL=false&createDatabaseIfNotExist=true
+    url: jdbc:mysql://192.168.1.20/blog?serverTimezone=GMT%2B8&characterEncoding=utf-8&useSSL=false&createDatabaseIfNotExist=true
     username: blog
     password: 17dhcjrw
   thymeleaf:
@@ -32,9 +32,9 @@ mongodb:
   dbconfig:
     # 库名
     database: blog
-    host: dengyongsheng.cn
+    host: 192.168.1.20
     port: 27017
-    username: admin
+    username: blog
     password: nwxb0nbx
   ## 数据库参数配置
   option:
